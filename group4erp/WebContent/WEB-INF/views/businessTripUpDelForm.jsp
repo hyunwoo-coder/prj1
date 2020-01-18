@@ -141,7 +141,8 @@ function checkBusinessTripUpDelAppForm(upDelApp){
 		        alert("시작날짜와 종료날짜를 확인해 주세요.");
 				$("[name=outside_start_time]").focus();
 		         return;
-		    }if(confirm("정말 수정하시겠습니까?")==false){return;}
+		    }
+		    if(confirm("정말 수정하시겠습니까?")==false){return;}
 		    
 		}else if(upDelApp=='app'){
 			$("[name=upDelApp]").val("app");
@@ -200,7 +201,7 @@ function checkBusinessTripUpDelAppForm(upDelApp){
 			}
 		});
 	}
-	</script>	
+
 </script>
 </head>
 <body><center><br><br><br>

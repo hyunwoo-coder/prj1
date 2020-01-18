@@ -78,7 +78,6 @@
 				</td>
 		</table>
 		<table><tr heigth=3><td></table>
-		<!-- <input type="button" value="수정/삭제" onclick="goBusinessTripUpDelForm()">&nbsp; -->
 		<input type="button" value="목록보기" onclick="location.replace('/group4erp/businessTripList.do')">
 	 </form>
 	 <%--

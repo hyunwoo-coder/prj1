@@ -85,9 +85,22 @@
 });
 
 	
-	
+
 	function goSearch(){
-		//var keyword = '';
+		var startDate = $( "[name=outside_start_time]" ).val();
+	    var startDateArr = startDate.split('-');
+	    var endDate = $( "[name=outside_end_time]" ).val();
+	    var endDateArr = endDate.split('-');
+	    var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+	    var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+	          
+	    if(startDateCompare.getTime() > endDateCompare.getTime()) {
+	              
+	        alert("시작날짜와 종료날짜를 확인해 주세요.");
+			$("[name=outside_start_time]").focus();
+	         return;
+	    }
+		
 		var  keyword = $("#searchKeyword").val();
 		var  searchKey = $("#selectSearch").val();
 		var  outsideTime = $("#datepicker3").val();
@@ -104,9 +117,9 @@
 	
 	function goAllSearch(){
 		document.getBusinessTripListSearchForm.reset();
-		//$("#searchForm").submit()
 		$('[name=getBusinessTripListSearchForm] [name=rowCntPerPage]').val('10');
 		$('[name=getBusinessTripListSearchForm] [name=selectPageNo]').val('1');
+		$('[name=getBusinessTripListSearchForm] [name=sort]').val('');
 		goSearch();
 	}
 	
@@ -132,7 +145,6 @@
 				) 
 				&& 
 				(travel_payment =="W")){
-				  alert($('[name=getBusinessTripListSearchForm]').serialize());
 				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
 				location.replace("/group4erp/businessTripUpDelForm.do?"+str )
 			}else{
@@ -156,9 +168,9 @@
      	<tr>
      		<th>출장 날짜</th>
      		<td colspan="2">
-				출발<input type="text" id="datepicker3" readonly>
+				출발<input type="text" id="datepicker3" name="outside_start_time" readonly>
 				~
-				복귀<input type="text" id="datepicker4" readonly>
+				복귀<input type="text" id="datepicker4" name="outside_end_time" readonly>
 				&nbsp;&nbsp;&nbsp;
 			</td>
      	</tr>
@@ -178,24 +190,20 @@
 					<option>------</option>
 					<option value="emp_name">성명</option>
 					<option value="dep_name">부서</option>
-					<option value="outside_start_time">출발 날짜</option>
-					<option value="outside_end_time">복귀 날짜</option>
-					<option value="travel_payment">결제</option>
+					<option value="mgr_name">담당자</option>
 			</select>
-				<span id="searchText">
-					<input type="text" id="searchKeyword">&nbsp;&nbsp;<input type="button" value=" 검색 " onClick="goSearch();">		
 				
-&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goAllSearch();">
+					<input type="text" id="searchKeyword">
+					
 				</span>
 
 			</td>
 		</tr>
 		</table>
 	 	<table><td></td></table>
-				<input type="button" value=" 검색 " onClick="goSearch();">		
-				&nbsp;&nbsp;
-				<input type="button" value="모두검색" onClick="goAllSearch();">		
-				&nbsp;&nbsp;
+	 			
+				<input type="button" value=" 검색 " onClick="goSearch();">&nbsp;&nbsp;
+				<input type="button" value="모두검색" onClick="goAllSearch();">&nbsp;&nbsp;
 				<input type="button" value="초기화" onClick="goReset();">
 			
 	 <table border=0 width=700>
