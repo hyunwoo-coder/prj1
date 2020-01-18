@@ -190,7 +190,7 @@ $(document).ready(function(){
 
 			<table border=0 width=700>
 				<tr>
-					<td align=right>[검색 수량] : ${bookListCnt} 권 <select
+					<td align=right>[검색 수량] : ${bookListCnt} 종 <select
 						name="rowCntPerPage">
 							<option value="10">10</option>
 							<option value="15">15</option>

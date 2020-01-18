@@ -62,4 +62,6 @@ public interface MarketingDAO {
 	
 	int updateEventReApproval(String document_no);
 	
+	int getDailyOfflineSalesTotCnt();
+	
 }

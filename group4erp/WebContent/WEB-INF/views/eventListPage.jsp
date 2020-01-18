@@ -87,7 +87,7 @@
 	
 		$(".pagingNumber").html(
 			getPagingNumber(
-				"${eventCnt}"						//검색 결과 총 이벤트 개수
+				"${eventAllCnt}"						//검색 결과 총 이벤트 개수
 				,"${eventSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
 				,"${eventSearchDTO.rowCntPerPage}"		//페이지 당 출력행의 개수
 				,"10"										//페이지 당 보여줄 페이지번호 개수
@@ -126,7 +126,7 @@
 		$('[name=searchEvntForm] [name=sort]').val("1");
 		$('[name=searchEvntForm] [name=selectPageNo]').val("1");
 		$('[name=searchEvntForm] [name=rowCntPerPage]').val("15");
-		$("[name=searchEvntForm] [name=sort]").val('');
+		//$("[name=searchEvntForm] [name=sort]").val('');
 		
 		goSearch();
 	}
@@ -277,9 +277,10 @@
 <body><center>
 
 	<h1>[이벤트 현황]</h1>
-    <input type="hidden" name="selectPageNo">
-    <input type="hidden" name="sort">
+    
 	<form name="searchEvntForm" method="post" action="/group4erp/viewEventList.do">
+	<input type="hidden" name="selectPageNo">
+    <input type="hidden" name="sort">
 		<table class="searchEvntTable tab" border="0" cellpadding="5" cellspacing="5">
 			<tr>
 	    		<td align="left">
@@ -319,8 +320,7 @@
 							</td>
 			</tr>
 		</table>
-		<input type="hidden" name="selectPageNo" >
-		<input type="hidden" name="sort" >
+
 	</form>
 	
 	<input type="button" value="이벤트 신청" onClick="reserveEvent();">&nbsp;
@@ -475,7 +475,7 @@
 					</c:forEach>
 				</table><br>
 					<c:if test="${empty eventList}">
-					<h5><center>해당 결과가 없습니다.</center></h5>
+						<h5><center>해당 결과가 없습니다.</center></h5>
 					</c:if>
 	
 			</form>

@@ -381,5 +381,12 @@
 		where evnt_no = #{document_no}
 	</update>
 	
+	
+	<select id="getDailyOfflineSalesTotCnt" resultType="int">
+		select
+			count(*)
+		from buy_offline_info
+	</select>
+	
 		
 </mapper>

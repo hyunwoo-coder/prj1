@@ -129,6 +129,7 @@ public class MarketingController {
 			
 			
 			List<SalesInfoDTO> dailyOfflineSalesChart = this.marketingService.getDailyOfflineSalesChart();
+			int dailyOfflineSalesTotCnt = this.marketingService.getDailyOfflineSalesTotCnt();
 			
 			String offline_chart_data = "[";
 			offline_chart_data += "['일자', '판매량']";
@@ -143,7 +144,7 @@ public class MarketingController {
 		
 			offline_chart_data +="]";
 			
-					
+			mav.addObject("dailyOfflineSalesTotCnt", dailyOfflineSalesTotCnt);		
 			mav.addObject("onlineOrderCnt", online_order_cnt);
 			mav.addObject("onlineOrderList", onlineOrderList);
 			mav.addObject("salesSearchDTO", salesSearchDTO);

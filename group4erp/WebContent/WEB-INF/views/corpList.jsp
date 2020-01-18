@@ -44,11 +44,11 @@
 		inputData('[name=sort]').val("${corpSearchDTO.sort}");
 		
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
-			inputData("[name=corp_business_area]", "${corpSearchDTO.corp_business_area}");		
+			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corpSearchDTO.corp_business_area}");		
 		</c:forEach>
 
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
-			$("[name=corp_business_area]").filter("[value = ${corpSearchDTO.corp_business_area} ]").prop("checked", true);
+			$("[name=corpSearchForm] [name=corp_business_area]").filter("[value = ${corpSearchDTO.corp_business_area} ]").prop("checked", true);
 		</c:forEach>
 
 	});
@@ -130,7 +130,6 @@
 		$("[name=updateCorpBtn]").val("수정");
 		
 	}
-	
 	
 	function updateCorpInfoProc(corp_no) {
 
@@ -221,6 +220,9 @@
 	<h1>[거래처 현황]</h1>
 	<form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
 		<!-- 검색 테스트중 -->
+			
+     	<input type="hidden" name="selectPageNo">
+     	<input type="hidden" name="sort">
 		
 		<table border="0" cellpadding="5" cellspacing="5">
 			<tr valign="top">
@@ -250,11 +252,7 @@
 														 </td>
 		</tr>
 	</table>
-	
-     <input type="hidden" name="selectPageNo">
-     <input type="hidden" name="sort">
-		
-	
+
 </form> 
 
 <table class="corpListMain" border="0" cellpadding="5" cellspacing="5">

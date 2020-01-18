@@ -192,7 +192,7 @@
 						<td colspan="4" align="center"><h5>일반 고객 주문 현황</h5></td>
 					</tr>
 					<tr>
-						<td>[오프라인 판매량]</td><td> ${onlineOrderCnt}건</td> <td>총 예상 수입액 </td><td> ${tot_revenue}원 </td>
+						<td>[오프라인 판매량]</td><td> ${dailyOfflineSalesTotCnt}건</td> <td>총 예상 수입액 </td><td> 원 </td>
 					</tr>
 					<tr>
 						<td>[온라인 주문량]</td><td> ${onlineOrderCnt}건</td> <td>총 예상 수입액 </td><td> ${tot_revenue}원 </td>
@@ -207,7 +207,7 @@
 						<td colspan="4" align="center"><h5>기업 고객 주문 현황</h5></td>
 					</tr>
 					<tr>
-						<td>[오프라인 판매량]</td><td> ${onlineOrderCnt}건</td> <td>총 예상 수입액 </td><td> ${tot_revenue}원 </td>
+						<td>[오프라인 판매량]</td><td> ${dailyOfflineSalesTotCnt}건</td> <td>총 예상 수입액 </td><td> 원 </td>
 					</tr>
 					<tr>
 						<td>[온라인 주문량]</td><td> ${corpOrderCnt}건 </td> <td>총 예상 수입액 </td><td> ${corpTotRevenue}원 </td>

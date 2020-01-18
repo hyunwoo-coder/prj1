@@ -89,6 +89,7 @@ public class ApprovalController {
 		mav.addObject("approvalReqList", approvalReqList);
 		mav.addObject("approvalResCnt", approvalResCnt);
 		mav.addObject("approvalResList", approvalResList);
+		mav.addObject("approvalSerachDTO", approvalSearchDTO);
 		
 		return mav;
 	}

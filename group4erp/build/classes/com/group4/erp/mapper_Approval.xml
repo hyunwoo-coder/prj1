@@ -33,10 +33,20 @@
 		from e_works_info ap
 		where 1=1
 		and ap.e_works_state_cd != '0'
-		and ap.emp_no = #{emp_no}
-		order by ap.e_works_req_dt
+		and ap.emp_no = #{emp_no}	
+		<include refid="headerSort" />
 	</select>
 	
+	
+	<sql id="headerSort">
+		<if test="sort!=null and sort.length() > 0" >
+			order by ${sort}
+		</if>
+		
+		<if test="sort==null or sort.length() == 0">
+			order by ap.e_works_req_dt
+		</if>
+	</sql>
 	
 	<select id="getApprovalResCnt" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="int">
 		select count(*) from e_works_info ap
@@ -55,22 +65,50 @@
 
 	
 	<select id="getApprovalResList" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="com.group4.erp.ApprovalDTO">
-      	select
-      		rownum "approval_num",
-			ap.e_works_no "e_works_no",
-			ap.document_no "document_no",
-			ap.emp_no "emp_no",        
-            ap.mgr_emp_no "mgr_emp_no",
-            <!-- (select e.emp_name from employee e where e.mgr_emp_no = ap.emp_no) "mgr_name", -->	
-			(select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no = ap.emp_no) )  "jikup",
-			(select e.emp_name from employee e where e.emp_no = ap.emp_no) "emp_name",			
-			to_char(ap.e_works_req_dt, 'yyyy.mm.dd(dy) hh24:mi:ss', 'nls_date_language=Korean') "e_works_req_dt",
-			ap.e_works_state_cd "e_works_state_cd",
-			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "approval_state"
+	select
+      		rownum "APPROVAL_NUM",
+			ap.e_works_no "E_WORKS_NO",
+            ap.document_no "DOCUMENT_NO",
+            ap.emp_no "EMP_NO",        
+            ap.mgr_emp_no "MGR_EMP_NO",
+            (select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no = ap.emp_no) )  "JIKUP",
+            (select e.emp_name from employee e where e.emp_no = ap.emp_no) "EMP_NAME",            
+            to_char(ap.e_works_req_dt, 'yyyy.mm.dd(dy) hh24:mi:ss', 'nls_date_language=Korean') "E_WORKS_REQ_DT",
+			ap.e_works_state_cd "E_WORKS_STATE_CD",
+			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "APPROVAL_STATE"
 		from e_works_info ap
-		where 1=1
-		and ap.e_works_state_cd in (1, 3, 6, 7)
-		and ap.mgr_emp_no = #{emp_no}
+			where 1=1
+			and ap.e_works_state_cd in (1, 3, 6, 7) 
+			and ap.mgr_emp_no = #{emp_no}
+      	<!--  select
+            approval_num "approval_num",
+            e_works_no "e_works_no",
+            document_no "document_no",
+            emp_no "emp_no",
+            mgr_emp_no "mgr_emp_no",
+            jikup "jikup",
+            emp_name "emp_name",
+            e_works_req_dt "e_works_req_dt",
+            e_works_state_cd "e_works_state_cd",
+            approval_state "approval_state"     
+        from
+        (select
+      		rownum "APPROVAL_NUM",
+			ap.e_works_no "E_WORKS_NO",
+            ap.document_no "DOCUMENT_NO",
+            ap.emp_no "EMP_NO",        
+            ap.mgr_emp_no "MGR_EMP_NO",
+            (select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no = ap.emp_no) )  "JIKUP",
+            (select e.emp_name from employee e where e.emp_no = ap.emp_no) "EMP_NAME",            
+            to_char(ap.e_works_req_dt, 'yyyy.mm.dd(dy) hh24:mi:ss', 'nls_date_language=Korean') "E_WORKS_REQ_DT",
+			ap.e_works_state_cd "E_WORKS_STATE_CD",
+			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "APPROVAL_STATE"
+		from e_works_info ap
+			where 1=1
+			and ap.e_works_state_cd in (1, 3, 6, 7) 
+			and ap.mgr_emp_no = #{emp_no}
+		)
+		<include refid="headerSort" /> -->
 	</select>
 	
 	

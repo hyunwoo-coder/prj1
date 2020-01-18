@@ -220,4 +220,12 @@ public class MarketingServiceImpl implements MarketingService {
 		return myEventReApproval;
 	}
 
+	@Override
+	public int getDailyOfflineSalesTotCnt() {
+		// TODO Auto-generated method stub
+		int dailyOfflineSalesTotCnt = this.marketingDAO.getDailyOfflineSalesTotCnt();
+		
+		return dailyOfflineSalesTotCnt;
+	}
+
 }

@@ -62,5 +62,7 @@ public interface MarketingService {
 	
 	int updateEventReApproval(String document_no);
 	
+	int getDailyOfflineSalesTotCnt();
+	
 
 }

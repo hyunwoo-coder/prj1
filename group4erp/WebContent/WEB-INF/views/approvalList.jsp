@@ -31,6 +31,8 @@
 				"${mouseOverColor}"			//마우스 온 시 배경색
 		);
 
+		inputData("[name=sort]", "${approvalSerachDTO.sort}");
+
 		$(document).on('click','#reApproval', function () {
 
 		    var document_no = $(this).attr("value");
@@ -47,7 +49,6 @@
 		    deleteApproval(document_no);
 		    	
 		});
-
 
 	});
 
@@ -126,9 +127,8 @@
 			location.replace("/group4erp/goEmpDayOffjoin.do");
 
 		} else if(document_no.indexOf('BT') >= 0) {
-			location.replace("/group4erp//businessTripForm.do");
+			location.replace("/group4erp/businessTripForm.do");
 		}
-	
 
 	}
 
@@ -166,6 +166,18 @@
 		});
 		
 	}
+
+	function goSearch() {
+
+		document.approvalReqForm.submit();
+
+	}
+
+	function goResSearch() {
+
+		document.approvalResForm.submit();
+
+	}
 		
 </script>
 </head>
@@ -173,13 +185,73 @@
 	<center>
 		<h3>결재할 서류 목록 [ ${approvalResCnt} ]</h3><br>
 		<form name="approvalResListForm" method="post" action="/group4erp/viewApprovalDoc.do" >
+		<input type="hidden" name="sort" >
 			<table class="approvalResList tab" name="approvalResList" cellpadding="5" cellspacing="5">
 			<tr>
-				<th>직급</th><th>사원</th><th>문서일련번호</th><th>결재요청시간</th><th>상태</th>
+				<c:choose>
+					<c:when test="${param.sort=='6 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goResSearch();  "> ▼ 직급</th>
+					</c:when>
+					<c:when test="${param.sort=='6 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('6 desc'); goResSearch(); "> ▲ 직급</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('6 asc'); goResSearch();  ">직급</th>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+					<c:when test="${param.sort=='7 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goResSearch();  "> ▼ 사원 성명</th>
+					</c:when>
+					<c:when test="${param.sort=='7 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('7 desc'); goResSearch(); "> ▲ 사원 성명</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('7 asc'); goResSearch();  ">사원 성명</th>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+					<c:when test="${param.sort=='3 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goResSearch();  "> ▼ 문서일련번호</th>
+					</c:when>
+					<c:when test="${param.sort=='3 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('3 desc'); goResSearch(); "> ▲ 문서일련번호</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('3 asc'); goResSearch();  ">문서일련번호</th>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+					<c:when test="${param.sort=='8 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goResSearch();  "> ▼ 결재요청시간</th>
+					</c:when>
+					<c:when test="${param.sort=='8 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('8 desc'); goResSearch(); "> ▲ 결재요청시간</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('8 asc'); goResSearch();  ">결재요청시간</th>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+					<c:when test="${param.sort=='9 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goResSearch();  "> ▼ 상태</th>
+					</c:when>
+					<c:when test="${param.sort=='9 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 desc'); goResSearch(); "> ▲ 상태</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 asc'); goResSearch();  ">상태</th>
+					</c:otherwise>
+				</c:choose>
+				
+				
 			</tr>
 			<c:forEach items='${approvalResList}' var="approvalResList" varStatus="loopTagStatus">
 				<tr style="cursor:pointer" onClick="viewAppResDoc('${approvalResList.document_no}');" align="center">
-					
 					<%--<td>${approvalResList.approval_num}</td> --%>
 					<td>${approvalResList.jikup}</td>
 					<td>${approvalResList.emp_name}</td>
@@ -189,8 +261,8 @@
 				</tr>	
 			</c:forEach>
 		
-		</table>
-		<input type="hidden" name="document_no" value="${document_no}">
+			</table>
+			<input type="hidden" name="document_no" value="${document_no}">
 		</form>
 		
 		<c:if test="${approvalResList.size()==0}">
@@ -201,38 +273,83 @@
 		
 		<span id="approvalReq"><h3>결재 요청한 서류 목록 [ ${approvalCnt} ]</h3></span>
 		
-		<table class="approvalReqList tab" name="approvalReqList" cellpadding="5" cellspacing="5">
-			<tr>
-				<th>순서</th><th>문서일련번호</th><th>결재요청시간</th><th>상태</th><th>비고</th>
-			</tr>
-			<c:forEach items='${approvalReqList}' var="approvalReqList" varStatus="loopTagStatus">			
-				<c:choose>
-					<c:when test="${approvalReqList.approval_state eq '심사중'}">
-						<tr> </tr>
-					</c:when>	
-					<c:otherwise>
-						<tr style="cursor:pointer" onClick="updateApprovalInfo(this, '${approvalReqList.e_works_no}', '${approvalReqList.document_no}', '${approvalReqList.approval_state}', '${approvalReqList.e_work_comment}');">
-					</c:otherwise>
-				</c:choose>
-					<td>${approvalReqList.e_works_no}</td>
-					<td>${approvalReqList.document_no}<input type="hidden" name="document_no" value="${approvalReqList.document_no}"></td>
-					<td>${approvalReqList.e_works_req_dt}</td> 
-					<td align="center">${approvalReqList.approval_state}</td> 
-					<td>
-						<c:if test="${approvalReqList.approval_state eq '대기중' || approvalReqList.approval_state eq '반려'}">
-							삭제 가능
-						</c:if>					
-					</td> 
-				</tr>	
-			</c:forEach>		
-		</table>
+		<!-- 결재를 요청한 내역을 보여주는 테이블 -->
+		<form name="approvalReqForm" method="post" action="/group4erp/viewApprovalList.do">		
+			<input type="hidden" name="sort" >
 		
-		<c:if test="${approvalReqList.size()==0}">
-			<h5>결재를 요청한 내역이 없습니다.</h5>
-		</c:if>
-		<h5>'대기중'인 결재 문서는 수정 & 삭제가 가능합니다.<br>
-		'심사중'인 결재 문건은 수정과 삭제가 불가하며, 부득이하게 취소하고자 할 경우에는 담당 부서장과 상의하시기 바랍니다.</h5>
-	</center>
+			<table class="approvalReqList tab" name="approvalReqList" cellpadding="5" cellspacing="5">
+				<tr>
+					<th>순서</th>
+					
+					<c:choose>
+						<c:when test="${param.sort=='2 desc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 문서 일련번호</th>
+						</c:when>
+						<c:when test="${param.sort=='2 asc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('2 desc'); goSearch(); "> ▲ 문서 일련번호</th>
+						</c:when>			
+						<c:otherwise>
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('2 asc'); goSearch();  ">문서 일련번호</th>
+						</c:otherwise>
+					</c:choose>
+				
+					<c:choose>
+						<c:when test="${param.sort=='7 desc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 결재요청시간</th>
+						</c:when>
+						<c:when test="${param.sort=='7 asc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('7 desc'); goSearch(); "> ▲ 결재요청시간</th>
+						</c:when>			
+						<c:otherwise>
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('7 asc'); goSearch();  ">결재요청시간</th>
+						</c:otherwise>
+					</c:choose>
+				
+					<c:choose>
+						<c:when test="${param.sort=='8 desc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 상태</th>
+						</c:when>
+						<c:when test="${param.sort=='8 asc'}">
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('8 desc'); goSearch(); "> ▲ 상태</th>
+						</c:when>			
+						<c:otherwise>
+							<th style="cursor:pointer" onClick="$('[name=sort]').val('8 asc'); goSearch();  ">상태</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<th>비고</th>
+					
+				</tr>
+				<c:forEach items='${approvalReqList}' var="approvalReqList" varStatus="loopTagStatus">			
+					<c:choose>
+						<c:when test="${approvalReqList.approval_state eq '심사중'}">
+							<tr> </tr>
+						</c:when>	
+						<c:otherwise>
+							<tr style="cursor:pointer" onClick="updateApprovalInfo(this, '${approvalReqList.e_works_no}', '${approvalReqList.document_no}', '${approvalReqList.approval_state}', '${approvalReqList.e_work_comment}');">
+						</c:otherwise>
+					</c:choose>
+						<td align="center">${approvalCnt - (loopTagStatus.index)}</td>
+					
+						<td>${approvalReqList.document_no}<input type="hidden" name="document_no" value="${approvalReqList.document_no}"></td>
+						<td>${approvalReqList.e_works_req_dt}</td> 
+						<td align="center">${approvalReqList.approval_state}</td> 
+						<td>
+							<c:if test="${approvalReqList.approval_state eq '대기중' || approvalReqList.approval_state eq '반려'}">
+								삭제 가능
+							</c:if>					
+						</td> 
+					</tr>	
+				</c:forEach>		
+			</table>
+		
+			<c:if test="${approvalReqList.size()==0}">
+				<h5>결재를 요청한 내역이 없습니다.</h5>
+			</c:if>
+		</form>
+			<h5>'대기중'인 결재 문서는 수정 & 삭제가 가능합니다.<br>
+			'심사중'인 결재 문건은 수정과 삭제가 불가하며, 부득이하게 취소하고자 할 경우에는 담당 부서장과 상의하시기 바랍니다.</h5>
+		</center>
 	
 </body>
 </html>

@@ -223,4 +223,12 @@ public class MarketingDAOImpl implements MarketingDAO {
 		return myEventReApproval;
 	}
 
+	@Override
+	public int getDailyOfflineSalesTotCnt() {
+		// TODO Auto-generated method stub
+		int dailyOfflineSalesTotCnt = this.sqlSession.selectOne(mapper_namespace+"getDailyOfflineSalesTotCnt");
+		
+		return dailyOfflineSalesTotCnt;
+	}
+
 }
