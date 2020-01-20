@@ -38,13 +38,13 @@ $(document).ready(function(){
 
 	inputData('[name=rowCntPerPage]',"${tranSpecSearchDTO.rowCntPerPage}");
 	inputData('[name=selectPageNo]',"${tranSpecSearchDTO.selectPageNo}");
+	inputData('[name=searchKeyword]',"${tranSpecSearchDTO.searchKeyword}");
 	inputData("[name=sort]", "${tranSpecSearchDTO.sort}");
 	
 });
 
 
 	function goSearch() {
-
 		var keyword = $("[name=searchKeyword]").val();
 		keyword = $.trim(keyword);
 		$("[name=searchKeyword]").val(keyword);

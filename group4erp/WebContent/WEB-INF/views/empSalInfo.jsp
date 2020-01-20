@@ -22,8 +22,6 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
-			inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val("1"));
-			
 			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
 			goSearch();
 		});

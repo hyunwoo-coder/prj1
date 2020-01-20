@@ -25,8 +25,8 @@
 
 
 		$("[name=rowCntPerPage]").change(function() {
-			//goSearch();
-			document.corpSearchRowPageForm.submit();
+			goSearch();
+			//document.corpSearchRowPageForm.submit();
 		});
 	
 		$(".pagingNumber").html(
@@ -42,20 +42,22 @@
 		inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${corpSearchDTO.selectPageNo}");
 		inputData('[name=sort]').val("${corpSearchDTO.sort}");
-		
+		inputData('[name=searchKeyword]').val("${corpSearchDTO.searchKeyword}");
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
 			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corpSearchDTO.corp_business_area}");		
 		</c:forEach>
 
-		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
+		/* <c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
 			$("[name=corpSearchForm] [name=corp_business_area]").filter("[value = ${corpSearchDTO.corp_business_area} ]").prop("checked", true);
-		</c:forEach>
+		</c:forEach> */
 
 	});
 
 
-	function goSearch() {
-
+	function goSearch() {	
+		var keyword =$('[name=searchKeyword]').val();
+		 alert(keyword)
+		$('[name=searchKeyword]').val(keyword);	
 		document.corpSearchForm.submit();
 	}
 

@@ -385,7 +385,8 @@
                 r.order_no "ORDER_NO",
                 r.isbn13 "ISBN13",
                 r.return_sales_cd "RETURN_SALES_CD",
-                r.return_order_dt "RETURN_ORDER_DT", 
+                r.return_order_dt "RETURN_ORDER_DT",
+                r.return_comment "RETURN_COMMENT",  
                 c.return_name "RETURN_CAUSE" 
                 from code_return c, return_sale_info r where c.return_cd = r.return_sales_cd)
 		where 1=1
@@ -402,13 +403,15 @@
 				isbn13 "isbn13",
 				return_sales_cd "return_cd",
 				return_order_dt "return_dt",
+                return_comment "return_comment",  
 	            return_cause "return_cause"
 			from (select 
 	                r.return_sales_no "RETURN_SALES_NO",
 	                r.order_no "ORDER_NO",
 	                r.isbn13 "ISBN13",
 	                r.return_sales_cd "RETURN_SALES_CD",
-	                r.return_order_dt "RETURN_ORDER_DT", 
+	                r.return_order_dt "RETURN_ORDER_DT",
+                	r.return_comment "RETURN_COMMENT",   
 	                c.return_name "RETURN_CAUSE" 
                 from code_return c, return_sale_info r where c.return_cd = r.return_sales_cd)
 		where 1=1 

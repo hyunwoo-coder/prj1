@@ -298,8 +298,19 @@
 	</select>
 	
 	<select id="getTranSpecIssueCnt" resultType="int">
-		select count(*) from tran_issue_info
-	
+		<!-- select count(*) from tran_issue_info where 1=1 -->
+		select count(*) from (
+        		select 
+					ti.issue_no "ISSUE_NO",
+					ti.order_no||'' "ORDER_NO",
+					ti.corp_no "CORP_NO",
+					(select c.corp_name from corporation_cus c where c.corp_no = ti.corp_no) "CORP_NAME",
+					(select c.ceo_name from corporation_cus c where c.corp_no = ti.corp_no) "CEO_NAME",
+					ti.order_dt "ORDER_DT",
+					to_char(ti.issue_dt, 'yyyy.mm.dd')|| '('||to_char(ti.issue_dt, 'dy', 'nls_date_language=Korean' )||')' "ISSUE_DT"
+				from tran_issue_info ti 
+			) where 1=1
+		<include refid="TranSpecIssueWhere" />
 	</select>
 	
 	
@@ -358,7 +369,7 @@
 	
 	
 	<insert id="saveTempTranSpec" parameterType="com.group4.erp.TranSpecDTO">
-		insert into tran_issue_info (
+		insert into  (
 			issue_no,
 			order_no,
 			corp_no,
