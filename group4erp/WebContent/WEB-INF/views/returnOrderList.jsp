@@ -54,6 +54,10 @@
               var dateObject = $(this).datepicker('getDate');
           }
       });
+
+      $('[name=rowCntPerPage]').change(function(){
+			goSearch();
+		})
       
       $(".pagingNumber").html(
                getPagingNumber(

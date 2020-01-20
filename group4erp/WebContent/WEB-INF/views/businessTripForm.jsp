@@ -152,6 +152,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 			}
 		}).open();
 	}
+
+	function goBack(){
+		history.back();
+	}
 </script>
 
 
@@ -201,6 +205,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 		
 		<input type="button" class="approval" value="결재 신청" onClick="checkBusinessTripRegForm()">
 		<input type="button" value="초기화" onClick="reset()"> 
+		<input type="button" value="뒤로가기" onclick="goBack()">
 		<input type="button" value="목록보기" onClick="goBusinessTripList()">
 	</form>
 	</center>

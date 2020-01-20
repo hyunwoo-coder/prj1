@@ -353,7 +353,7 @@
 							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼날짜</th>
 						</c:when>
 						<c:when test="${param.sort=='DT_WORK asc'}">
-							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DT_WORK asc'); goSearch()">▲날짜</th>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DT_WORK desc'); goSearch()">▲날짜</th>
 						</c:when>
 						<c:otherwise>
 							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DT_WORK asc'); goSearch();">날짜</th>
@@ -460,7 +460,7 @@
 						<c:when test="${param.sort=='REMARKS desc'}">
 							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼비고</th>
 						</c:when>
-						<c:when test="${param.sort=='REMARKS desc'}">
+						<c:when test="${param.sort=='REMARKS asc'}">
 							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('REMARKS desc'); goSearch()">▲비고</th>
 						</c:when>
 						<c:otherwise>

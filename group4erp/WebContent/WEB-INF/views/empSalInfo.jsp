@@ -22,10 +22,13 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
+			inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val("1"));
+			
 			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
 			goSearch();
 		});
 
+		
 		$(".pagingNumber").html(
 				getPagingNumber(
 					"${myPayCheckCnt}"						//검색 결과 총 행 개수
@@ -37,8 +40,11 @@
 			);
 
 		//검색 후 입력양식에 넣었던 검색 조건들 세팅하기
-		$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
-		$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
+		//$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		//$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
+		
+		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		$('[name=sort]').val("${salListSearchDTO.sort}");
 
 		//$('[name=rowCntPerPage]').val($('[name=empSalForm] [name=rowCntPerPage]').val());
@@ -51,7 +57,6 @@
 	
 	
 	function goSearch() {
-		
 		document.empSalForm.submit();
 	}
 
@@ -78,12 +83,12 @@
 			</tr>
 		</table>
 			
-		<input type="hidden" name="selectPageNo">
-		<input type="hidden" name="rowCntPerPage">
-		<input type="hidden" name="sort">
+		<input type="text" name="selectPageNo">
+		<input type="text" name="rowCntPerPage">
+		<input type="text" name="sort">
 
 		
-	</form>
+	
 	
 	<table name="outerBorder" cellpadding="5" cellspacing="5">
 		<tr>			
@@ -264,7 +269,7 @@
 		</tr>
 	
 	</table>
-	
+	</form>
 	<h5>귀하의 노고에 감사드립니다.</h5>
 	<input type="button" value="뒤로 가기" onClick="javascript:history.go(-1);">
 </center>

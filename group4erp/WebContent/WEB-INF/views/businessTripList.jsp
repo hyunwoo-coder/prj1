@@ -58,9 +58,6 @@
 		});
 		
 		
-		/* alert($("[name=getBusinessTripListSearchForm] [name=selectPageNo]").val());
-		alert($("[name=getBusinessTripListSearchForm] [name=rowCntPerPage]").val()); */
-		//페이징 처리 관련 HTML 소스를 class=pagingNumber 가진 태그 안에 삽입하기
 		$(".pagingNumber").html(
 				getPagingNumber(
 				"${businessTripListAllCnt}"						//검색 결과 총 행 개수

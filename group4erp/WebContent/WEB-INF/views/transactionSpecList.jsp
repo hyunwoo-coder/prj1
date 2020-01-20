@@ -249,7 +249,17 @@
 				</c:otherwise>
 			</c:choose>
 			
-				<th>거래명세서 발급</th>
+			<c:choose>
+				<c:when test="${param.sort=='9 desc'}">
+					<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 거래명세서 발급</th>
+				</c:when>
+				<c:when test="${param.sort=='9 asc'}">
+					<th style="cursor:pointer" onClick="$('[name=sort]').val('9 desc'); goSearch(); "> ▲ 거래명세서 발급</th>
+				</c:when>			
+				<c:otherwise>
+					<th style="cursor:pointer" onClick="$('[name=sort]').val('9 asc'); goSearch();  ">거래명세서 발급</th>
+				</c:otherwise>
+			</c:choose>
 			</tr>
 	
 			<c:forEach items='${corp_tran_list}' var="tranList" varStatus="loopTagStatus">

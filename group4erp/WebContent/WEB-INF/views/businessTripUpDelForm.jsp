@@ -202,6 +202,9 @@ function checkBusinessTripUpDelAppForm(upDelApp){
 		});
 	}
 
+	function goBack(){
+		history.back();
+	}
 </script>
 </head>
 <body><center><br><br><br>
@@ -279,6 +282,9 @@ function checkBusinessTripUpDelAppForm(upDelApp){
 					<input type="button" value="삭제" onclick="checkBusinessTripUpDelAppForm('del')">
 				</td>
 				<td>
+					<input type="button" value="뒤로가기" onclick="goBack()">
+				</td>
+				<td>
 					<input type="button" value="목록보기" onclick="location.replace('/group4erp/businessTripList.do')">
 				</td>
 			</tr>
@@ -288,8 +294,8 @@ function checkBusinessTripUpDelAppForm(upDelApp){
 		<!-- 게시판 상세보기 화면을 구성하는 글의 고유번호를 hidden 태그에 저장 -->
 		<!-- 수정/삭제를 하려면 현재 글의 고유번호를 알아야하기 때문 -->
 		<input type="hidden" name="work_outside_seq" value="${businessTripDTO.work_outside_seq}">
-		<input type="hidden" name="selectPageNo" value="${param.selectPageNo}">
-		<input type="hidden" name="rowCntPerPage" value="${param.rowCntPerPage}">
+		<input type="text" name="selectPageNo" value="${param.selectPageNo}">
+		<input type="text" name="rowCntPerPage" value="${param.rowCntPerPage}">
 	</form>
 	 
 </body>

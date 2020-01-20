@@ -21,6 +21,10 @@
 	function goBusinessTripUpDelForm(){
 		document.businessTripUpDelForm.submit();
 	}
+
+	function goBack(){
+		history.back();
+	}
 </script>
 </head>
 <body><center><br><br><br>
@@ -78,6 +82,7 @@
 				</td>
 		</table>
 		<table><tr heigth=3><td></table>
+		<input type="button" value="뒤로가기" onclick="goBack()">
 		<input type="button" value="목록보기" onclick="location.replace('/group4erp/businessTripList.do')">
 	 </form>
 	 <%--
