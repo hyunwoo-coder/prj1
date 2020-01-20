@@ -45,9 +45,9 @@ $(document).ready(function(){
 
 	function goSearch() {
 
-		var keyword = $("[name=corpSearchForm] [name=searchKeyword]").val();
+		var keyword = $("[name=searchKeyword]").val();
 		keyword = $.trim(keyword);
-		$("[name=corpSearchForm] [name=searchKeyword]").val(keyword);
+		$("[name=searchKeyword]").val(keyword);
 		
 		document.corpSearchForm.submit();
 	}

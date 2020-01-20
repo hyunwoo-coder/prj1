@@ -272,7 +272,7 @@
 	
 	
 	<update id="deleteEvnt" parameterType="map">	
-			update event_info set evnt_state_cd = 7
+			update event_info set evnt_state_cd = 0
 			where evnt_no in (
 			<foreach collection="array" item="evnt_no" index="index" separator=",">
 				#{evnt_no}

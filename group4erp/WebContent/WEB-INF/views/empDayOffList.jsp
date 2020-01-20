@@ -715,7 +715,7 @@
 					<th bgcolor="gray" style="cursor:pointer">휴가 시작일</th>
 					<th bgcolor="gray" style="cursor:pointer">복귀 예정일</th>-->
 
-					<th bgcolor="black" style="cursor:pointer">NO</th>
+					<th bgcolor="black" style="cursor:pointer">번호</th>
 					<c:choose>
 						<c:when test="${param.sort=='dayoff_apply_no desc'}">
 							<th bgcolor="black" style="cursor:pointer" onClick="$('[name=sort]').val(''); goDayoffSearch();">▼ 신청번호</th>

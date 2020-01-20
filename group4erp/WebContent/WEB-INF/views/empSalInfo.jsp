@@ -22,34 +22,36 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
-			//alert("행보기 변경");
+
+			inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val("1"));			
+			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
 			goSearch();
 		});
 
+		
 		$(".pagingNumber").html(
-			getPagingNumber(
-				"${myPayCheckCnt}"						//검색 결과 총 행 개수
-				,"${salListSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
-				,"${salListSearchDTO.rowCntPerPage}"		//페이지 당 출력행의 개수
-				,"10"										//페이지 당 보여줄 페이지번호 개수
-				,"goSearch();"						//페이지 번호 클릭 후 실행할 자스코드
-			)
-		);
+
+				getPagingNumber(
+					"${myPayCheckCnt}"						//검색 결과 총 행 개수
+					,"${salListSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
+					,"${salListSearchDTO.rowCntPerPage}"		//페이지 당 출력행의 개수
+					,"10"										//페이지 당 보여줄 페이지번호 개수
+					,"goSearch();"						//페이지 번호 클릭 후 실행할 자스코드
+				)
+			);
+
+		//검색 후 입력양식에 넣었던 검색 조건들 세팅하기
+		//$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		//$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		
-		$(".empSalInfo").each(function() {
-			$(this).val($.number($(this).val()));
-		});
-		
-		inputData('[name=rowCntPerPage]', "${salListSearchDTO.rowCntPerPage}");
-		inputData('[name=selectPageNo]', "${salListSearchDTO.rowCntPerPage}");
-		//inputData("[name=sort]", "${salListSearchDTO.sort}");	
+		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		$('[name=sort]').val("${salListSearchDTO.sort}");
 
 	});
 	
 	
 	function goSearch() {
-		
 		document.empSalForm.submit();
 	}
 
@@ -72,6 +74,7 @@
 
 		<input type="hidden" name="selectPageNo">
 		<input type="hidden" name="sort">
+
 	
 		<table class="tab" cellpadding="5" cellspacing="5">
 			<tr>			
@@ -253,7 +256,8 @@
 	
 	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div><br>
 	
-	
+	</form>
+
 	<h5>귀하의 노고에 감사드립니다.</h5>
 	<input type="button" value="뒤로 가기" onClick="javascript:history.go(-1);">
 </center>

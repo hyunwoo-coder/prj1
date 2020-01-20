@@ -42,6 +42,10 @@
 	        <!-- <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
 	        <property name="username" value="booklocal" />
 	        <property name="password" value="k123" /> -->
+	        
+	        <!-- <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
+	        <property name="username" value="book2" />
+	        <property name="password" value="b123" /> -->
 	</bean>		
 	<bean id="log4jdbcProxyDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="basicDataSource" />

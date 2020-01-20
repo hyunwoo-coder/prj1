@@ -366,7 +366,24 @@
 							onclick="$('[name=sort]').val('14 asc'); goSearchMyWorkList();">보유지점
 					</c:otherwise>
 			</c:choose>
-            <th width="8%">비고
+			
+            
+			
+			<c:choose>
+					<c:when test="${param.sort=='9 desc'}">
+						<th width="8%" style="cursor: pointer"
+							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼절판 상황
+					</c:when>
+					<c:when test="${param.sort=='9 asc'}">
+						<th width="8%" style="cursor: pointer"
+							onclick="$('[name=sort]').val('9 desc'); goSearchMyWorkList();">▲절판 상황
+					</c:when>
+					<c:otherwise>
+						<th width="8%" style="cursor: pointer"
+							onclick="$('[name=sort]').val('9 asc'); goSearchMyWorkList();">절판 상황
+					</c:otherwise>
+			</c:choose>
+			<th width="8%">비고</th>
         </thead>
         <tbody>    
          <c:forEach items="${requestScope.MyCareBookList}" var="MyCareBookList" varStatus="loopTagStatus">
@@ -379,6 +396,7 @@
             <td align=center>${MyCareBookList.book_price}
             <td align=center>${MyCareBookList.ISBN_cnt}
             <td align=center>${MyCareBookList.branch_name}
+			<td align=center>${MyCareBookList.is_print}
 
             <td align=center>
                <c:if test="${MyCareBookList.ISBN_cnt < 100}">
