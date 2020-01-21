@@ -39,6 +39,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	border-width: thin;
 }
 </style>
+
+<% String emp_num = (String)session.getAttribute("emp_id"); %>
+
 <script>
 	$(document).ready(function() {
 		$("#datepicker1").datepicker({
@@ -169,7 +172,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 		<tr>
 			<th>사원 번호</th>
 				<td>
-					<input type="text" id="emp_no" name="emp_no">
+					<input type="text" id="emp_no" name="emp_no" value=<%=emp_num %> readonly>
 				</td>
 		</tr>
 		

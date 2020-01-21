@@ -193,8 +193,8 @@
             (select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no=wi.emp_no) ) "jikup",
 			wi.destination "destination",
 			wi.work_outside_reason "work_outside_reason",
-			to_char(wi.outside_start_time, 'yyyy.mm.dd') "outside_start_time",
-			to_char(wi.outside_end_time, 'yyyy.mm.dd') "outside_end_time",
+			to_char(wi.outside_start_time, 'yyyy.mm.dd(dy)', 'NLS_DATE_LANGUAGE=KOREAN') "outside_start_time",
+			to_char(wi.outside_end_time, 'yyyy.mm.dd(dy)', 'NLS_DATE_LANGUAGE=KOREAN') "outside_end_time",
 			wi.travel_payment "travel_payment",
 			wi.delete_yn "delete_yn"
 		from work_outside_info wi

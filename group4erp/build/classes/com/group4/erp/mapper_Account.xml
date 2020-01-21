@@ -245,7 +245,7 @@
 	
 	<select id="getTranSpecList" parameterType="int" resultType="com.group4.erp.TranSpecDTO">
 		select 
-    		co.order_books_no,  
+    		co.order_books_no "order_books_no",  
     		co.corp_no "corp_no",  
     		(select c.corp_name from corporation_cus c where c.corp_no = co.corp_no) "corp_name",   
     		(select c.ceo_name from corporation_cus c where c.corp_no = co.corp_no) "ceo_name",   

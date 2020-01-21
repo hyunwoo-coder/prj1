@@ -278,7 +278,7 @@
 						발급완료
 					</c:if>
 					<c:if test="${tranList.issueYn == 0}">
-						<input type="button" value="발급" onClick="issueTranSpec();"></td>
+						미발급<!-- <input type="button" value="발급" onClick="issueTranSpec();"> --></td>
 					</c:if>
 			</tr>
 			</c:forEach>

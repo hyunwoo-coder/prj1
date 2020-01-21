@@ -127,7 +127,7 @@
 			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "approval_state"
 		from e_works_info ap
 		where 1=1
-        and ap.e_works_state_cd = '7'
+        and ap.e_works_state_cd = '7' 
         and exists(select * from e_works_info where mgr_emp_no=100001 and e_works_state_cd in ('1', '3') )
 	</select>
 	

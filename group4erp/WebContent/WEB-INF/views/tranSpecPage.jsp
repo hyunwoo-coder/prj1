@@ -59,11 +59,13 @@
 			</tr>
 				<tr><td>사업자번호</td><td name="corp_no">${tranSpecList.corp_no} </td></tr>
 				<tr><td>사업자명</td><td name="ceo_name">${tranSpecList.ceo_name}</td></tr>
+				<tr><td>소재지</td><td name="corp_addr">${tranSpecList.corp_addr}</td></tr>
 				<tr><td>연락처</td><td name="corp_tel">${tranSpecList.corp_tel}</td></tr>
 				<tr><td>FAX</td><td name="corp_fax">${tranSpecList.corp_fax}</td></tr>
 				
 				<tr><td>거래일시</td><td colspan="2" name="order_dt">${tranSpecList.order_dt}</td></tr>
-				<tr><td>품명</td><td colspan="2" name="book_name">${tranSpecList.book_name} &nbsp;(isbn : ${tranSpecList.isbn13})</td></tr>	
+				<tr><td>품명</td><td colspan="2" name="book_name">${tranSpecList.book_name} &nbsp;(isbn : ${tranSpecList.isbn13})</td></tr>
+				<tr><td>주문번호</td></td><td colspan="2" name="order_books_no"> ${tranSpecList.order_books_no}</td></tr>
 				<tr><td>수량</td><td colspan="2" name="qty">${tranSpecList.books_qty} 권</td></tr>
 				<tr><td>단가</td><td colspan="2" name="unit_price">${tranSpecList.book_price} 원</td></tr>
 				<tr><td>공급가액</td><td colspan="2">${tranSpecList.tot_cost} 원</td></tr>	
