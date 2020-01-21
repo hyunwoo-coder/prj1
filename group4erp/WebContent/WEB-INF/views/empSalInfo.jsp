@@ -77,7 +77,6 @@
 	직책 : ${jikup}	&nbsp;&nbsp; 성명 :${emp_name}  <br>
 	
 	<form name="empSalForm" method="post" action="/group4erp/viewEmpSalInfo.do">
-<<<<<<< HEAD
 
 		<input type="hidden" name="selectPageNo">
 		<input type="hidden" name="sort">

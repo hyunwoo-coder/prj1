@@ -255,7 +255,7 @@
 </head>
 <body>
 	<center>
-		<h3>결재할 서류 목록 [ ${approvalResCnt} ]</h3><br>
+		<h3>결재할 서류 목록 <%--[ ${approvalResCnt} ] --%></h3><br>
 		<form name="approvalResListForm" method="post" action="/group4erp/viewApprovalDoc.do" >
 		<input type="hidden" name="sort" >
 			<table class="approvalResList tab" name="approvalResList" cellpadding="5" cellspacing="5">
@@ -343,7 +343,7 @@
 		
 		<br><br><br>
 		
-		<span id="approvalReq"><h3>결재 요청한 서류 목록 [ ${approvalCnt} ]</h3></span>
+		<span id="approvalReq"><h3>결재 요청한 서류 목록 <%--[ ${approvalCnt} ] --%></h3></span>
 		
 		<!-- 결재를 요청한 내역을 보여주는 테이블 -->
 		<form name="approvalReqForm" method="post" action="/group4erp/viewApprovalList.do">		

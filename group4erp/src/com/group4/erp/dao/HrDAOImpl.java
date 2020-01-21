@@ -239,16 +239,19 @@ public class HrDAOImpl implements HrDAO {
 		return newEmpInsertCnt;
 	}
 	
+	
 	public int getAddDayoffinfoCnt(EmployeeInfoUpDTO employeeInfoUpDTO) {
-		
-		int addDayoffinfo = this.sqlSession.insert(
-				mapper_namespace+"getAddDayoffinfo"
-				,employeeInfoUpDTO
-				);
-				
-		return addDayoffinfo;
-	}
-
+	      String emp_no = employeeInfoUpDTO.getEmp_no();
+	      int addDayoffinfo = 0;
+	      if(emp_no.length() < 6) {
+	         addDayoffinfo = this.sqlSession.insert(
+	               mapper_namespace+"getAddDayoffinfo"
+	               ,employeeInfoUpDTO
+	         );
+	         
+	      }
+	      return addDayoffinfo;
+	   }
 
 	/*
 	public String getMgrEmpName(EmployeeDTO employeeDTO){
