@@ -287,7 +287,9 @@
 		</tr><!-- 메인 목록 끝 -->
 	
 	</table>
-	
+	<c:if test="${corp_tran_cnt eq 0}">
+			<h5>해당 결과가 없습니다.</h5>
+	</c:if>
 	<form name="tranSpecTable" method="post" action="/group4erp/viewTranSpecInfo.do">
 		
 	<input type="hidden" name="order_no">

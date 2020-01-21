@@ -511,7 +511,9 @@
 		
 		
 		<table><tr height=10><td></table>
-		
+		<c:if test="${getEmpInoutListCnt eq 0}">
+				<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	
 	</form>

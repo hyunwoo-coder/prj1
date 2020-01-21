@@ -293,7 +293,7 @@
 	 				order by ${sort}
 	 			</if>
 	 			<if test="sort==null or sort.length()==0">
-	 				order by ISBN13 asc
+	 				order by published_dt desc
 	 			</if>
 
 		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>

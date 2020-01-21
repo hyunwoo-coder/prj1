@@ -81,8 +81,8 @@
 			</tr>
 		</table>
 			
-		<input type="text" name="selectPageNo">
-		<input type="text" name="sort">
+		<input type="hidden" name="selectPageNo">
+		<input type="hidden" name="sort">
 
 		
 	

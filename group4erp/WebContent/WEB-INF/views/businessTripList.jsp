@@ -218,7 +218,7 @@
      
         <input type="hidden" name="searchKey" id="searchKey" >
 		<input type="hidden" name="keyword" id="keyword">
-		<input type="text" name="selectPageNo"> 
+		<input type="hidden" name="selectPageNo"> 
         <input type="hidden" name="startTime" id="startTime">
         <input type="hidden" name="endTime" id="endTime">
         <input type="hidden" name="sort" id="sort">
@@ -232,6 +232,7 @@
 		<table class="businessTripListTable tab"  name="businessTripListTable" cellpadding="5" cellspacing="5">		
 			<thead>
 				<tr>
+					
 					<th>번호</th>
 					
 			
@@ -324,10 +325,13 @@
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 asc'); goSearch();">결재</th>
 						</c:otherwise>
 					</c:choose>
+					
+					
 				</tr>
+					
 			</thead>
 			<tbody>
-			
+				
 			<c:forEach items="${businessTripList}" var="businessList" varStatus="loopTagStatus">
 			<tr class="tab" style="cursor:pointer" onClick="goBusinessTripContentsForm(${businessList.work_outside_seq}
 																						,${businessList.emp_no}
@@ -368,18 +372,21 @@
 					</td>
 			</tr>		
 			</c:forEach>
+			
 			</tbody>
 		</table>
+		<c:if test="${businessTripListAllCnt eq 0}">
+						<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 		<br>
 		<input type="button" value="출장 신청" onClick="goBusinessTripForm();">	
 		<br><br>
 		
+		
+		
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 		
-<c:if test=" ${boardListAllCnt==0}">
-   		검색 결과가 없습니다
-   		
-</c:if>
+		
 
 </center>
 

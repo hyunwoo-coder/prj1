@@ -185,11 +185,13 @@ $(document).ready(function(){
 				</table>
 			</td>
 		</tr>
-	
+		
 	</table>
 
 	
 </center>
-
+		<c:if test="${tranSpecIssueCnt eq 0}">
+				<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 </body>
 </html>

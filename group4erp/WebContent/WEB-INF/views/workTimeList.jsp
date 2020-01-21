@@ -58,6 +58,15 @@
 	function reset(){
 		document.workStateListSearch.reset();
 	}
+	function goAllSerch(){
+		document.workStateListSearch.reset();
+
+
+		$('[name=workStateListSearch] [name=rowCntPerPage]').val('20');
+		$('[name=workStateListSearch] [name=selectPageNo]').val('1');
+		$('[name=workStateListSearch] [name=sort]').val('');
+		document.workStateListSearch.submit();
+	}
 </script>
 
 </head>
@@ -76,6 +85,14 @@
 									<option value="${searchEmpNo.emp_no}">${searchEmpNo.emp_no}
 								</c:forEach>
 					</select></td>
+					</td>
+				</tr>
+					
+			</table>
+			<table>
+				<tr>
+					<td>
+						<input type="button" value="모두 검색" onClick="goAllSerch();">
 					</td>
 				</tr>
 			</table>
