@@ -59,6 +59,7 @@
 	<context:component-scan base-package="com.group4.erp" /> 
 	<context:component-scan base-package="com.group4.client" /> 
 	
+		
 	<!--**********************************************************************************************-->
 	<!-- 현재 이 스프링 설정 파일 안에서 bean 태그로 등록된 [서비스 클래스] 또는 [DAO 클래스]의 클래스명 앞, 메서드 앞에  -->
 	<!-- @Transactional 붙여 [트랜잭션]을 처리하도록 해주는 객체들을 등록하기. -->

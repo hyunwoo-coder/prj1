@@ -1,5 +1,6 @@
 package com.group4.erp.controller;
 
+import java.io.File;
 import java.util.*;
 import javax.servlet.http.*;
 
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group4.erp.EventDTO;
@@ -216,7 +220,7 @@ public class MarketingController {
 	
 	//이벤트 신청 페이지 보기
 	@RequestMapping(value="/eventScheduling.do")
-	public ModelAndView eventScheduling(HttpSession session, String evnt_no, String document_no, EventDTO eventDTO) {
+	public ModelAndView eventScheduling(HttpSession session, String evnt_no, EventDTO eventDTO) {
 		
 		ModelAndView mav = new ModelAndView();
 		//mav.setViewName("eventScheduleForm.jsp");
@@ -224,19 +228,29 @@ public class MarketingController {
 		mav.addObject("subMenu", "eventReserve");
 		mav.addObject("navigator", "[마케팅관리] → [이벤트행사 현황] → [이벤트신청]");
 		
-		if(evnt_no != null) {
-			
-			System.out.println("재결재합니다. document_no==="+evnt_no);
-			EventDTO myEventInfo = this.marketingService.getMyEventInfoApproval(evnt_no);
-			mav.addObject("myEventReApproval", myEventInfo);
-			
-		}
+		System.out.println("eventScheduling() 메소드 실행");
 		
 		try {
-			int eventAllCnt = this.marketingService.getEventNumForApproval();
-			int eventNo = eventAllCnt+1;
+		
+			if(evnt_no != null) {
 			
-			mav.addObject("eventNo", eventNo);
+				System.out.println("재결재합니다. document_no==="+evnt_no);
+				EventDTO myEventInfo = this.marketingService.getMyEventInfoApproval(evnt_no);
+			
+				System.out.println("myEventInfo.getEvent_start_dt==="+myEventInfo.getEvnt_start_dt());
+				System.out.println("myEventInfo.getEvent_end_dt==="+myEventInfo.getEvnt_end_dt());
+			
+				mav.addObject("myEventReApproval", myEventInfo);
+			
+			} else {
+				
+				int eventAllCnt = this.marketingService.getEventNumForApproval();
+				int eventNo = eventAllCnt+1;
+				
+				mav.addObject("eventNo", eventNo);
+			}
+
+		
 		} catch(Exception e) {
 			System.out.println("eventScheduling() 메소드에서 예외 발생");
 		} 
@@ -253,7 +267,7 @@ public class MarketingController {
 	)
 	
 	@ResponseBody
-	public int insertEvent(HttpSession session, EventDTO eventDTO) {
+	public int insertEvent(HttpSession session, EventDTO eventDTO, String evnt_no) {
 		
 		int insertEventCnt = 0;
 		int insertApprovalCnt = 0;
@@ -262,10 +276,16 @@ public class MarketingController {
 		
 		try {
 
-			System.out.println("EventDTO.getAtchd_data==="+eventDTO.getAtchd_data());
+			//System.out.println("EventDTO.getAtchd_data==="+eventDTO.getAtchd_data());
+			
+			//System.out.println("emp_no==="+emp_no);
+			//System.out.println("evnt_no==="+evnt_no);
+			System.out.println("event_no of DTO ==="+eventDTO.getEvnt_no());
 			eventDTO.setEmp_no(Integer.parseInt(emp_no));
-					
+			eventDTO.setAtchd_data(null);
+			
 			insertEventCnt = this.marketingService.insertEvent(eventDTO);
+			System.out.println("insertEventCnt==="+insertEventCnt);
 			
 			if(insertEventCnt > 0) {
 				
@@ -286,7 +306,7 @@ public class MarketingController {
 			insertEventCnt = -1;
 		} 
 				
-		return insertEventCnt;		
+		return insertEventCnt;	
 	}
 	
 	
@@ -322,19 +342,27 @@ public class MarketingController {
 			method=RequestMethod.POST, 
 			produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public int updateEventProc(EventDTO eventDTO, ApprovalDTO approvalDTO) {
+	public int updateEventProc(EventDTO eventDTO, ApprovalDTO approvalDTO, String evnt_no) {
 		int upCnt = 0;
 		int upApprovalCnt = 0;
 		int myReApprovalCnt =0;
-		
-		String document_no = eventDTO.getEvnt_no();
-		System.out.println("재결재 이벤트 번호==="+document_no);
-		
+			
 		try {
+			
+			String document_no = eventDTO.getEvnt_no();
+			
+			if(document_no != null) {
+				System.out.println("재결재 이벤트 번호==="+document_no);
+			}
+			
+			System.out.println("event_title==="+eventDTO.getEvnt_title());
+			
 			System.out.println("컨트롤러 updateEventProc() 메소드 실행");
 					
 			//이벤트 재결재시 결재 테이블에도 반영(대기중)
 			myReApprovalCnt = this.approvalService.getMyReApprovalCnt(document_no);
+			
+			System.out.println("evnt_comment==="+eventDTO.getEvnt_comment());
 			
 			if(myReApprovalCnt > 0) {
 				
@@ -344,7 +372,7 @@ public class MarketingController {
 				eventDTO.setEvnt_state_cd("1");
 				eventDTO.setEvnt_no(document_no);
 				
-				upCnt = this.marketingService.updateEventReApproval(document_no);
+				upCnt = this.marketingService.updateEventInfo(eventDTO);
 				upApprovalCnt = this.approvalService.updateApprovalProc(approvalDTO);
 			} else {
 				
@@ -362,7 +390,7 @@ public class MarketingController {
 	
 	
 	//광고 현황 조회
-	@RequestMapping(value="/viewAdApplyList.do")
+	/*@RequestMapping(value="/viewAdApplyList.do")
 	public ModelAndView viewAdApplyList(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -473,7 +501,7 @@ public class MarketingController {
 		} 
 				
 		return updateCnt;		
-	}
+	} */
 	
 	
 }

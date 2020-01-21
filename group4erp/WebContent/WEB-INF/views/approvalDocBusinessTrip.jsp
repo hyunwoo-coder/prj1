@@ -18,23 +18,23 @@
 		var e_work_comment = $(".BTripApprovalDoc [name=documentTable]").find("[name=e_work_comment]").val();
 		
 		
-		if(approvalYn==6) {
+		if( (approvalYn==6) && (e_work_comment=="") ){
 			alert("반려 시 사유를 기입해주세요.");
 
 			return;		
 		}
 	
 		$.ajax({
-			url : "/group4erp/updateDayOffApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
+			url : "/group4erp/updateBTripApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
 			type : "post",										//전송 방법 설정
 			data : $('.BTripApprovalDoc').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정	
 			success : function(upCnt) {
 				if(upCnt==1) {
-					alert("결재 성공!");
+					alert("출장 결재 성공!");
 				
 					location.replace("/group4erp/viewApprovalList.do");
 				} else if(delCnt==0) {	
-					alert("결재 로직 실패!");
+					alert("출장 결재 로직 실패!");
 				
 				location.replace("/group4erp/viewApprovalList.do");
 

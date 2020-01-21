@@ -196,5 +196,12 @@
 		select count(*) from e_works_info
 		where document_no = #{document_no}
 	</select>
+	
+	<update id="updateBTripApproval" parameterType="com.group4.erp.ApprovalDTO">
+	
+		update work_outside_info set
+			travel_payment = #{confirm}
+		where work_outside_seq = #{doc_no}
+	</update>
 	 
 </mapper>

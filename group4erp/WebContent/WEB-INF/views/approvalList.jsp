@@ -96,7 +96,7 @@
 		    htmlCode += "<input type='hidden' name='e_work_no' value="+e_works_no+">"
 		    htmlCode += "<input type='hidden' name='document_no' value="+document_no+">"
 
-		    if(approval_state == '반려') {
+		    if(approval_state == '반려' || approval_state == '대기중') {
 
 				htmlCode += "<button id ='reApproval' name='reApproval' value='"+document_no+"'>다시 결재요청하기</button>&nbsp;"
 				htmlCode += "<button id = 'removeApproval' name='removeApproval' value='"+document_no+"'>삭제</button>&nbsp;"
@@ -121,6 +121,7 @@
 	function reApprovalProc(document_no) {
 		//alert("다시 결재 요청합니다. "+document_no);
 		if(document_no.indexOf('EV') >= 0) {
+			//alert("이벤트 행사 재결재");
 			location.replace("/group4erp/eventScheduling.do?evnt_no="+document_no);
 
 		} else if(document_no.indexOf('DO') >= 0) {
@@ -136,34 +137,106 @@
 	function deleteApproval(document_no) {
 		//alert("삭제 로직 시작=="+document_no);
 
-		$.ajax({
-			url : "/group4erp/deleteEventApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
-			type : "post",										//전송 방법 설정
-			//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
-			
-			success : function(delCnt) {
-				if(delCnt==1) {
-					alert("이벤트 결재 삭제 성공!");
-					
-					location.replace("/group4erp/viewApprovalList.do");
-				} else if(delCnt==0) {
-					alert("이벤트 결재 삭제 실패");
+		if(document_no.indexOf("EV") >= 0) {
 
-				} else if(delCnt==-1) {	
-					//alert("업체가 이미 삭제되었습니다!");
-					
-					location.replace("/group4erp/viewApprovalList.do");
+			//alert("이벤트 행사 결재 삭제");
 
-				} else {
-					alert("서버쪽 DB 연동 실패!");
+			$.ajax({
+				url : "/group4erp/deleteEventApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("이벤트 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("이벤트 결재 삭제 실패");
+
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
 				}
-			}
 
-			//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
-			, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
-				alert("서버 접속 실패!");
-			}	
-		});
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+			
+		} else if(document_no.indexOf("DO") >= 0) {
+			alert("휴가 신청 삭제");
+
+			$.ajax({
+				url : "/group4erp/deleteDayOffApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("휴가 신청 & 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("휴가 신청 & 결재 삭제 실패");
+
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
+				}
+
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+			
+
+		} else if(document_no.indexOf("BT") >= 0) {
+			alert("출장 신청 삭제");
+
+			$.ajax({
+				url : "/group4erp/deleteBTripApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("출장 신청 & 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("출장 신청 & 결재 삭제 실패");
+
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
+				}
+
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+		}
+
+		/* */
 		
 	}
 

@@ -335,35 +335,38 @@ public class HRController {
 	}
 
 	@RequestMapping(value = "/newEmpInfoProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public int newEmpjoinMemberProc(EmployeeDTO employeeDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
-		int newEmpInsertCnt = 0;
+	   @ResponseBody
+	   public int newEmpjoinMemberProc(EmployeeDTO employeeDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
+	      int newEmpInsertCnt = 0;
 
-		try {
-			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
-			String originalFilename = multipartFile.getOriginalFilename();
-			if(originalFilename.isEmpty() != true){	
-				originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
-				//int length = originalFilename.length();
-				int position =  originalFilename.lastIndexOf(".");
-				String emp_email = employeeDTO.getEmp_email();
-				//System.out.println("emp_no=>"+emp_no);
-				String upFileName = emp_email + originalFilename.substring(position);
-				File localFile = new File(profilePath + upFileName);
-				//if(localFile.exists()==true){
-				//	localFile.delete();
-				//}
-				multipartFile.transferTo(localFile);
-				employeeDTO.setEmp_pic(upFileName);
-				newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
-			}
-		} catch (Exception e) {
-			System.out.println("<사원 등록 실패>");
-			System.out.println("예외 발생=>" + e);
-		}
+	      try {
+	         String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
+	         String originalFilename = multipartFile.getOriginalFilename();
+	         if(originalFilename.isEmpty() != true){   
+	            originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
+	            //int length = originalFilename.length();
+	            int position =  originalFilename.lastIndexOf(".");
+	            String emp_email = employeeDTO.getEmp_email();
+	            //System.out.println("emp_no=>"+emp_no);
+	            String upFileName = emp_email + originalFilename.substring(position);
+	            File localFile = new File(profilePath + upFileName);
+	            //if(localFile.exists()==true){
+	            //   localFile.delete();
+	            //}
+	            multipartFile.transferTo(localFile);
+	            employeeDTO.setEmp_pic(upFileName);
+	         }
+	         else {
+	            employeeDTO.setEmp_pic("newWithoutPic");
+	         }
+	         newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
+	      } catch (Exception e) {
+	         System.out.println("<사원 등록 실패>");
+	         System.out.println("예외 발생=>" + e);
+	      }
 
-		return newEmpInsertCnt;
-	}
+	      return newEmpInsertCnt;
+	   }
 
 	// ================================
 	// 직원 상세보기 수정화면에서 수정될 값들 받는 ajax

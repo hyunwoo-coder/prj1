@@ -121,7 +121,7 @@
 		document.searchEvntForm.reset();
 	}
 
-	function updateEventInfo(idx, evnt_no, evnt_title, evnt_start_dt, evnt_end_dt) {
+	function updateEventInfo(idx, evnt_no, evnt_title, evnt_start_dt, evnt_end_dt, evnt_comment) {
 		
 		var thisTr = $(idx).parent().parent();
 		var delTr = $('.eventListTable [name=test]');
@@ -155,7 +155,7 @@
 	      htmlCode += "<tr> <th>이벤트 타이틀</th> <td><input type='text' name='evnt_title' value='"+evnt_title+"'></td></tr>"
 	      htmlCode += "<tr> <th>시작일</th> <td><input type='text' name='evnt_start_dt' value='"+evnt_start_dt+"'></td></tr>"
 	   	  htmlCode += "<tr> <th>종료일</th> <td><input type='text' name='evnt_end_dt' value='"+evnt_end_dt+"'></td></tr>"
-	   	  htmlCode += "<tr> <th>메시지</th> <td><textarea name='evnt_comment'/></td></tr>"
+	   	  htmlCode += "<tr> <th>메시지</th> <td><textarea name='evnt_comment' value='"+evnt_comment+"'>"+evnt_comment+"</textarea></td></tr>"
 	      htmlCode += "</table>"
 	      htmlCode += "<input type='hidden' name='evnt_no' value="+evnt_no+">"
 	      htmlCode += "<input type='button' value='저장' name='updateEvent' onClick='updateEventProc();'>&nbsp;"
@@ -310,7 +310,7 @@
 		
 	<table border="0" cellpadding="5" cellspacing="5">
 		<tr>
-			<td align="right">[전체 행사 횟수] : ${eventAllCnt}회 &nbsp; &nbsp; ${emp_name} ${jikup} 님 담당 행사 : ${eventCnt}회</td>
+			<td align="right">[전체 행사 횟수] : ${eventAllCnt}회 &nbsp;<%--${emp_name} ${jikup} 님 담당 행사 : ${eventCnt}회 --%></td>
 			<td align="right"  valign="center" width="100">
 				
 					<select name="rowCntPerPage">
@@ -402,6 +402,7 @@
 						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 asc'); goSearch();  ">상태</th>
 					</c:otherwise>
 				</c:choose>
+				<th>성명</th>
 				<th>비고</th>
 			</tr>
 			
@@ -419,8 +420,9 @@
 					<td align=center>${eventList.evnt_start_dt}</td>
 					<td align=center>${eventList.evnt_end_dt}</td>
 					<td align=center>${eventList.evnt_stat}</td>
+					<td align=center>${eventList.emp_name}</td>
 					<td><c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려'}">
-							<input type="button" name="updateBtn" value="수정" onClick="updateEventInfo(this,'${eventList.evnt_no}', '${eventList.evnt_title}', '${eventList.evnt_start_dt}', '${eventList.evnt_end_dt}');">
+							<input type="button" name="updateBtn" value="수정" onClick="updateEventInfo(this,'${eventList.evnt_no}', '${eventList.evnt_title}', '${eventList.evnt_start_dt}', '${eventList.evnt_end_dt}', '${eventList.evnt_comment}');">
 						</c:if>
 					</td>
 				</tr>		

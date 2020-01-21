@@ -124,4 +124,20 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		return myReApprovalCnt;
 	}
 
+	@Override
+	public int deleteDayOffApproval(int dayoff_apply_no) {
+		// TODO Auto-generated method stub
+		int deleteMyDayOffApproval = this.sqlSession.delete(mapper_namespace+"deleteDayOffApproval", dayoff_apply_no);
+		
+		return deleteMyDayOffApproval;
+	}
+
+	@Override
+	public int updateBTripApprovalProc(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int bTripApprovalCnt = this.sqlSession.update(mapper_namespace+"updateBTripApproval", approvalDTO);
+		
+		return bTripApprovalCnt;
+	}
+
 }

@@ -172,7 +172,7 @@
 			</td>
      	</tr>
      	<tr>
-     		<th>결제 상태</th>
+     		<th>결재 상태</th>
      		<td colspan="2">
      			<input type="checkbox" name='payment' class="payment" value="Y">승인
          		<input type="checkbox" name='payment' class="payment" value="W">대기중

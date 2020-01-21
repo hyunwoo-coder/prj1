@@ -120,4 +120,20 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return myReApprovalCnt;
 	}
 
+	@Override
+	public int deleteDayOffApproval(int dayoff_apply_no) {
+		// TODO Auto-generated method stub
+		int delMyDayOffApproval = this.approvalDAO.deleteDayOffApproval(dayoff_apply_no);
+		
+		return delMyDayOffApproval;
+	}
+
+	@Override
+	public int updateBTripApprovalProc(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int bTripApprovalCnt = this.approvalDAO.updateBTripApprovalProc(approvalDTO);
+		
+		return bTripApprovalCnt;
+	}
+
 }
