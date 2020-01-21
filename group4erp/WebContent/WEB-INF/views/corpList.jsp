@@ -25,7 +25,6 @@
 
 
 		$("[name=rowCntPerPage]").change(function() {
-			inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 			goSearch();
 			//document.corpSearchRowPageForm.submit();
 		});
@@ -36,38 +35,37 @@
 					,"${corpSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
 					,"${corpSearchDTO.rowCntPerPage}"		//페이지 당 출력행의 개수
 					,"10"										//페이지 당 보여줄 페이지번호 개수
-					,"goSearch();"						//페이지 번호 클릭 후 실행할 자스코드
+					,"goPage();"						//페이지 번호 클릭 후 실행할 자스코드
 				)
 			);
 
+		
 		inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${corpSearchDTO.selectPageNo}");
-		inputData('[name=searchKeyword]').val("${corpSearchDTO.searchKeyword}");
-		inputData('[name=sort]').val("${corpSearchDTO.sort}");
+		inputData('[name=searchKeyword]',"${corpSearchDTO.searchKeyword}");
+		inputData('[name=sort]',"${corpSearchDTO.sort}");
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
-		
-			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corpSearchDTO.corp_business_area}");		
+			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corp_business_area}");		
 		</c:forEach>
 
-		/* <c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
-			$("[name=corpSearchForm] [name=corp_business_area]").filter("[value = ${corpSearchDTO.corp_business_area} ]").prop("checked", true);
-		</c:forEach> */
-
 	});
-
-
-	function goSearch() {	
-		var keyword =$('[name=searchKeyword]').val();
-		alert(keyword)
-		$('[name=searchKeyword]').val(keyword);	
+	function goPage() {
 		document.corpSearchForm.submit();
 	}
+
+	function goSearch() {
+		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
+		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
+		$("[name=corpSearchForm] [name=sort]").val('');
+		document.corpSearchForm.submit();
+	}
+	
 
 	function goSearchAll() {
 		document.corpSearchForm.reset();
 
 		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
-		$('[name=corpSearchForm] [name=rowCntPerPage]').val("15");
+		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
 		$("[name=corpSearchForm] [name=sort]").val('');
 		goSearch();
 	}
@@ -257,7 +255,6 @@
 		</tr>
 	</table>
 
-</form> 
 
 <table class="corpListMain" border="0" cellpadding="5" cellspacing="5">
 	<tr>
@@ -265,7 +262,6 @@
 	
 	</tr>
 	<tr>
-	<form name="corpSearchRowPageForm" method="post" action="/group4erp/viewCorpList.do">
 		<td align="right">[전체] : ${corpListCnt}개&nbsp;&nbsp;&nbsp;&nbsp;
 	            <select name="rowCntPerPage">
 	               <option value="10">10</option>
@@ -274,7 +270,6 @@
 	               <option value="25">25</option>
 	               <option value="30">30</option>
 	            </select> 행보기 </td>
-	</form>
 	</tr>
 	<tr>
 		<td> 
@@ -391,6 +386,7 @@
 		
 		</td>
 	</tr>
+	</form>
 
 </table>
 <c:if test="${corpListCnt==0}">
