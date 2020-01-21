@@ -5,6 +5,7 @@ public class CorpSearchDTO {
 	private String searchKeyword;
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
+	private String keyword;
 	
 	private String corp_no;
 	private String order_books_no;
@@ -15,10 +16,25 @@ public class CorpSearchDTO {
 	private String sort;
 	//private String corp_business[];
 	private String corp_business_area[];
+	private String corp_business_name[];
 	private String issueYn;
 	
 	
-	
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String[] getCorp_business_name() {
+		return corp_business_name;
+	}
+
+	public void setCorp_business_name(String[] corp_business_name) {
+		this.corp_business_name = corp_business_name;
+	}
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}

@@ -38,7 +38,8 @@
 		select count(*) from corporation_cus cc
 		where cc.is_on_business='y'
 		and 1=1
-		<include refid="corpListCntWhere" />
+		<include refid="whereCondition" />
+		<!-- <include refid="corpListCntWhere" /> -->
 	</select>
 	
 	<sql id="corpListCntWhere">
@@ -86,8 +87,8 @@
 				cc.corp_addr "corp_addr",
 				cc.corp_fax "corp_fax",
 				cc.corp_tel "corp_tel",
-				cc.corp_business_area "corp_business_area",
-				<!-- (select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) "corp_business_area", -->
+				cc.corp_business_area "corp_business_area", 
+				(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) "corp_business_name",
 				cc.is_on_business "is_on_business",
 				cc.reg_dt "reg_dt"
 			from corporation_cus cc
@@ -118,28 +119,36 @@
 			<foreach collection="corp_business_area" item="corp_business_area" open="(" separator=" or " close=")" >
 			
 			 	<if test="corp_business_area.equals('IT')">
-					cc.corp_business_area ='IT'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='IT'
+					<!-- cc.corp_business_area ='IT' -->
 				</if>
 				<if test="corp_business_area.equals('통신')">
-					cc.corp_business_area='통신'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='통신'
+					<!-- cc.corp_business_area='통신' -->
 				</if>
 				<if test="corp_business_area.equals('금융')">
-					cc.corp_business_area='금융'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='금융'
+					<!-- cc.corp_business_area='금융' -->
 				</if>
 				<if test="corp_business_area.equals('출판&amp;미디어')">
-					cc.corp_business_area='출판&amp;미디어'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='출판&amp;미디어'
+					<!-- cc.corp_business_area='출판&amp;미디어' -->
 				</if>
 				<if test="corp_business_area.equals('교육&amp;학원')">
-					cc.corp_business_area='교육&amp;학원'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='교육&amp;학원'
+					<!-- cc.corp_business_area='교육&amp;학원' -->
 				</if>
 				<if test="corp_business_area.equals('운송&amp;물류')">
-					cc.corp_business_area='운송&amp;물류'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='운송&amp;물류'
+					<!-- cc.corp_business_area='운송&amp;물류' -->
 				</if>
 				<if test="corp_business_area.equals('학교')">
-					cc.corp_business_area='학교'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='학교'
+					<!-- cc.corp_business_area='학교' -->
 				</if>
 				<if test="corp_business_area.equals('기타')">
-					cc.corp_business_area='기타'
+					(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) ='기타'
+					<!-- cc.corp_business_area='기타' -->
 				</if>
 				
 			</foreach>			

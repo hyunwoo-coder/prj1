@@ -218,7 +218,7 @@
      
         <input type="hidden" name="searchKey" id="searchKey" >
 		<input type="hidden" name="keyword" id="keyword">
-		<input type="hidden" name="selectPageNo"> 
+		<input type="text" name="selectPageNo"> 
         <input type="hidden" name="startTime" id="startTime">
         <input type="hidden" name="endTime" id="endTime">
         <input type="hidden" name="sort" id="sort">

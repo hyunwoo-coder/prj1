@@ -13,7 +13,7 @@
 
 		//$(".updateArea").hide();
 	
-		headerSort("corpListTable", 0);
+		//headerSort("corpListTable", 0);
 
 		setTableTrBgColor(
 				"corpListTable",	//테이블 class 값
@@ -25,6 +25,7 @@
 
 
 		$("[name=rowCntPerPage]").change(function() {
+			inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 			goSearch();
 			//document.corpSearchRowPageForm.submit();
 		});
@@ -41,9 +42,10 @@
 
 		inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${corpSearchDTO.selectPageNo}");
-		inputData('[name=sort]').val("${corpSearchDTO.sort}");
 		inputData('[name=searchKeyword]').val("${corpSearchDTO.searchKeyword}");
+		inputData('[name=sort]').val("${corpSearchDTO.sort}");
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
+		
 			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corpSearchDTO.corp_business_area}");		
 		</c:forEach>
 
@@ -56,7 +58,7 @@
 
 	function goSearch() {	
 		var keyword =$('[name=searchKeyword]').val();
-		 alert(keyword)
+		alert(keyword)
 		$('[name=searchKeyword]').val(keyword);	
 		document.corpSearchForm.submit();
 	}
@@ -223,8 +225,8 @@
 	<form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
 		<!-- 검색 테스트중 -->
 			
-     	<input type="hidden" name="selectPageNo">
-     	<input type="hidden" name="sort">
+     	<input type="text" name="selectPageNo">
+     	<input type="text" name="sort">
 		
 		<table border="0" cellpadding="5" cellspacing="5">
 			<tr valign="top">
@@ -377,7 +379,7 @@
 					<td>${corpList.corp_no}</td>
 					<td>${corpList.corp_name}</td>
 					<td>${corpList.ceo_name}</td>
-					<td>${corpList.corp_business_area}</td> 
+					<td>${corpList.corp_business_name}</td> 
 					<td>${corpList.corp_addr}</td> 
 					<td>${corpList.corp_tel} </td> 
 					<td>${corpList.corp_fax} </td> 

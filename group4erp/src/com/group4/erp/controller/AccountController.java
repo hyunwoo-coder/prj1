@@ -51,19 +51,23 @@ public class AccountController {
 			if(corpListCnt >0 ) {
 				int selectPageNo = corpSearchDTO.getSelectPageNo();	//선택한 페이지 번호 구하기
 				int rowCntPerPage = corpSearchDTO.getRowCntPerPage();	//한 화면에 보여지는 행의 개수 구하기
-				int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage +1;	//검색할 시작행 번호 구하기
-				if(corpListCnt < beginRowNo) {		//만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한 페이지 번호를 1로 지정
-					corpSearchDTO.setSelectPageNo(1);
-				}
+				int beginRowNo = (selectPageNo * rowCntPerPage - rowCntPerPage +1);	//검색할 시작행 번호 구하기
+				if(corpListCnt < beginRowNo) corpSearchDTO.setSelectPageNo(1);
 			}
 			
 			List<CorporationDTO> corpList = this.accountService.getCorpList(corpSearchDTO);
 			List<CorporationDTO> business_area = this.accountService.getBusiness_area();
+
+			System.out.println(corpSearchDTO.getSelectPageNo());
+			System.out.println(corpSearchDTO.getRowCntPerPage());
+			System.out.println(corpSearchDTO.getSearchKeyword());
+			System.out.println(corpSearchDTO.getKeyword());
 			
 			mav.addObject("corpListCnt", corpListCnt);
 			mav.addObject("corpList", corpList);
 			mav.addObject("corp_business_area", business_area);
 			mav.addObject("corpSearchDTO", corpSearchDTO);
+			
 						
 		} catch(Exception e) {
 			System.out.println("예외발생=="+e);
