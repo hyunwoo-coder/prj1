@@ -54,7 +54,6 @@
 
 	function goSearchAll() {
 		document.corpSearchForm.reset();
-
 		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
 		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
 		$("[name=corpSearchForm] [name=sort]").val('');

@@ -22,7 +22,6 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
-			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
 			goSearch();
 		});
 
@@ -41,15 +40,16 @@
 		//$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
 		//$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		
-		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		inputData('[name=rowCntPerPage]', "${salListSearchDTO.rowCntPerPage}");
+		inputData('[name=selectPageNo]',"${salListSearchDTO.selectPageNo}");
+		inputData('[name=sort]',  "${salListSearchDTO.sort}");
+		/* $('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
 		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
-		$('[name=sort]').val("${salListSearchDTO.sort}");
+		$('[name=sort]').val("${salListSearchDTO.sort}"); */
 
 		//$('[name=rowCntPerPage]').val($('[name=empSalForm] [name=rowCntPerPage]').val());
 		//$('[name=selectPageNo]').val($('[name=empSalForm] [name=selectPageNo]').val());
 		
-		inputData('[name=rowCntPerPage]',  $('[name=empSalForm] [name=rowCntPerPage]').val());
-		inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val());
 		//inputData("[name=sort]", "${salListSearchDTO.sort}");
 	});
 	
@@ -82,7 +82,6 @@
 		</table>
 			
 		<input type="text" name="selectPageNo">
-		<input type="text" name="rowCntPerPage">
 		<input type="text" name="sort">
 
 		
