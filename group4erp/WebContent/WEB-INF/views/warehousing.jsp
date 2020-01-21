@@ -514,8 +514,10 @@ td{
 			</c:forEach>
 		
       </table>
-      
      <table><tr height=10><td></table>
+     	<c:if test="${warehousingListCnt eq 0}">
+				<h3>해당 결과가 없습니다.</h3>
+		</c:if>
 		
 	<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	

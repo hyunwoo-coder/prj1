@@ -17,7 +17,6 @@ public class CorporationDTO {
 	private String bus_area_name;
 	
 
-	
 	public String getCorp_business_name() {
 		return corp_business_name;
 	}

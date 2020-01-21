@@ -163,6 +163,9 @@
 		alert("사업자번호 유효성 체크");
 	}
 
+	function goBack(){
+		history.back();
+	}
 </script>
 </head>
 <body><center>
@@ -200,6 +203,8 @@
 		</table> <br>
 	<input type="button" value="등록" onClick="checkRegForm();">
 	<input type="reset" value="초기화">
+	<input type="button" value="뒤로가기" onClick="goBack();">
+	<input type="button" value="목록보기" onClick="location.replace('/group4erp/viewCorpList.do');">
 	
 	</form>
 

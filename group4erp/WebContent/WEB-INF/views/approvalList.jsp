@@ -64,7 +64,7 @@
 
 
 
-	function updateApprovalInfo(idx, e_works_no, document_no, approval_state, e_work_comment) {
+	function 	(idx, e_works_no, document_no, approval_state, e_work_comment) {
 		
 		var thisTr = $(idx);
 		var delTr = $('.approvalReqList [name=test]');
@@ -137,11 +137,10 @@
 	function deleteApproval(document_no) {
 		//alert("삭제 로직 시작=="+document_no);
 
+
 		if(document_no.indexOf("EV") >= 0) {
 
-			//alert("이벤트 행사 결재 삭제");
-
-			$.ajax({
+		$.ajax({
 				url : "/group4erp/deleteEventApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
 				type : "post",										//전송 방법 설정
 				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정

@@ -36,7 +36,7 @@ public class WarehousingController {
 		// mav.setViewName("eventScheduleForm.jsp");
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewWarehousingList"); // viewInventoryList 아무 이름이나 설정 가능. 메인 페이지에서 해당 메뉴 뜰 때 해당 페이지를
-															// 임포트하기 위해서 붙이는 플래그명
+		mav.addObject("navigator", "[재고현황] → [입고현황]");													// 임포트하기 위해서 붙이는 플래그명
 		try {
 			System.out.println(warehousingSearchDTO.getSearchToday());
 			List<Map<String, String>> branch = this.warehousingService.getBranch(warehousingSearchDTO);

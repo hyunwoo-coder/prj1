@@ -13,7 +13,7 @@
 
 		//$(".updateArea").hide();
 	
-		headerSort("corpListTable", 0);
+		//headerSort("corpListTable", 0);
 
 		setTableTrBgColor(
 				"corpListTable",	//테이블 class 값
@@ -22,10 +22,9 @@
 				"${evenTrColor}",	//짝수행 배경색
 				"${mouseOverColor}"			//마우스 온 시 배경색
 			);
-		
 
 		$("[name=rowCntPerPage]").change(function() {
-			
+
 			goSearch();
 			//document.corpSearchRowPageForm.submit();
 		});
@@ -40,13 +39,14 @@
 				)
 			);
 
-		inputData("[name=rowCntPerPage]", "${corpSearchDTO.rowCntPerPage}");
-		inputData("[name=selectPageNo]", "${corpSearchDTO.selectPageNo}");
-		inputData("[name=searchKeyword]", "${corpSearchDTO.searchKeyword}");
-		inputData("[name=sort]").val("${corpSearchDTO.sort}");
-		
+	
+		inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
+		inputData('[name=selectPageNo]',"${corpSearchDTO.selectPageNo}");
+		inputData('[name=searchKeyword]',"${corpSearchDTO.searchKeyword}");
+		inputData('[name=sort]',"${corpSearchDTO.sort}");
+
 		<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
-			inputData('[name=corp_business_area]', "${corp_business_area}");	
+			inputData("[name=corpSearchForm] [name=corp_business_area]", "${corp_business_area}");		
 		</c:forEach>
 
 		<%--<c:forEach items="${corpSearchDTO.corp_business_area}" var="corp_business_area">
@@ -54,29 +54,30 @@
 		</c:forEach>--%>
 
 	});
-
-
 	function goSearch() {
+
 		
 		var keyword = $("[name=searchKeyword]").text();
 		$("#searchKeyword").val(keyword);
 
 		document.corpSearchForm.submit();
 	}
+	
 
 	function goSearchAll() {
 		document.corpSearchForm.reset();
 
-		$('[name=selectPageNo]').val("1");
-		$('[name=rowCntPerPage]').val("15");
-		$("[name=sort]").val('');
-		
+		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
+		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
+		$("[name=corpSearchForm] [name=sort]").val('');
+
 		goSearch();
 	}
 	
 	function goReset() {
 		document.corpSearchForm.reset();
 	}
+	
 	function insertCorp() {
 		//alert("거래처 추가");
 		location.replace("/group4erp/goInsertCorpPage.do");
@@ -275,7 +276,7 @@
 	
 	</tr>
 	<tr>
-	<!-- <form name="corpSearchRowPageForm" method="post" action="/group4erp/viewCorpList.do"> -->
+
 		<td align="right">[전체] : ${corpListCnt}개&nbsp;&nbsp;&nbsp;&nbsp;
 	            <select name="rowCntPerPage">
 	               <option value="10">10</option>
@@ -284,8 +285,10 @@
 	               <option value="25">25</option>
 	               <option value="30">30</option>
 	            </select> 행보기 </td>
+
 	<!-- </form> -->
 	</form> 
+
 	</tr>
 	<tr>
 		<td> 
@@ -402,6 +405,7 @@
 		
 		</td>
 	</tr>
+	</form>
 
 </table>
 <c:if test="${corpListCnt==0}">

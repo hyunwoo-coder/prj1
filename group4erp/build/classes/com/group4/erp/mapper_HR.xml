@@ -46,7 +46,7 @@
 			and 
 			<foreach collection="inout_name" item="inout" open="(" separator="or" close=")">
              	<if test="inout.equals('출근')">
-					(select check_inout from code_check_inout where eio.check_inout_cd = check_inout_cd and )=#{inout}
+					(select check_inout_name from code_check_inout where eio.check_inout_cd = check_inout_cd)=#{inout}
 				</if>
              	<if test="inout.equals('퇴근')">
 					(select check_inout_name from code_check_inout where eio.check_inout_cd = check_inout_cd)=#{inout}
@@ -267,7 +267,7 @@
 
 	
 	<select id='getDayOffListCnt' resultType="int">
-		select count(*) from EMP_DAYOFF_APPLY da where 1=1 <include refid="dayoffWhere" />	
+		select count(*) from EMP_DAYOFF_APPLY da where 1=1 and da.confirm in ('Y', 'N') <include refid="dayoffWhere" />	
 	</select>
 	
 	

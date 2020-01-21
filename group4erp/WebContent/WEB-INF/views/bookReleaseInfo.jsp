@@ -509,7 +509,9 @@ $(document).ready(function(){
 		<input type="button" value="  주문 삭제  " onclick="goDeleteRelease();">&nbsp;&nbsp;
 
 		</div> -->
-
+		<c:if test="${releaseListCnt eq 0}">
+				<h5>검색결과가 없습니다.</h5>
+		</c:if>
 
 		<script>
 			

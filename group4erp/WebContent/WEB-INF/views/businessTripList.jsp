@@ -36,7 +36,7 @@
 </style>
 <script>
 	$(document).ready(function(){
-
+		
 		setTableTrBgColor(
 				"businessTripListTable",	//테이블 class 값
 				"${headerColor}",			//헤더 tr 배경색
@@ -142,15 +142,15 @@
 				) 
 				&& 
 				(travel_payment =="W")){
-				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripUpDelForm.do?"+str )
-			}else{
-				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripContentsForm.do?"+str )}
+						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+						location.href="/group4erp/businessTripUpDelForm.do?"+str;
+					}else{
+						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+						location.href="/group4erp/businessTripContentsForm.do?"+str;}
 	}
 
 	function goBusinessTripForm() {
-		location.href = "/group4erp/businessTripForm.do";
+		location.href="/group4erp/businessTripForm.do";
 	}
 	
 </script>
@@ -232,6 +232,7 @@
 		<table class="businessTripListTable tab"  name="businessTripListTable" cellpadding="5" cellspacing="5">		
 			<thead>
 				<tr>
+					
 					<th>번호</th>
 					
 			
@@ -324,10 +325,13 @@
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 asc'); goSearch();">결재</th>
 						</c:otherwise>
 					</c:choose>
+					
+					
 				</tr>
+					
 			</thead>
 			<tbody>
-			
+				
 			<c:forEach items="${businessTripList}" var="businessList" varStatus="loopTagStatus">
 			<tr class="tab" style="cursor:pointer" onClick="goBusinessTripContentsForm(${businessList.work_outside_seq}
 																						,${businessList.emp_no}
@@ -368,18 +372,21 @@
 					</td>
 			</tr>		
 			</c:forEach>
+			
 			</tbody>
 		</table>
+		<c:if test="${businessTripListAllCnt eq 0}">
+						<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 		<br>
 		<input type="button" value="출장 신청" onClick="goBusinessTripForm();">	
 		<br><br>
 		
+		
+		
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 		
-<c:if test=" ${boardListAllCnt==0}">
-   		검색 결과가 없습니다
-   		
-</c:if>
+		
 
 </center>
 

@@ -326,6 +326,9 @@
          </tr>
       </c:forEach>
    </table>
+   		<c:if test="${returnOrderCnt eq 0}">
+				<h5>해당 결과가 없습니다.</h5>
+		</c:if>
    <div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 </center>
 

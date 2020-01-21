@@ -143,19 +143,35 @@ public class HRController {
 		System.out.println("salListSearchDTO.getSelectPageNo=="+salListSearchDTO.getSelectPageNo());
 		
 		int myPayCheckCnt = this.hrservice.getMyPayCheckCnt(my_emp_no);
+
 			
+		//List<SalaryDTO> empSalInfo = this.hrservice.getEmpSalList(salListSearchDTO);
+		if(myPayCheckCnt>0) {
+			//선택한 페이지 번호 구하기
+			int selectPageNo = salListSearchDTO.getSelectPageNo();
+			//한 화면에 보여지는 행의 개수 구하기
+			int rowCntPerPage = salListSearchDTO.getRowCntPerPage();
+			//검색할 시작행 번호 구하기
+			int beginRowNo = (selectPageNo*rowCntPerPage-rowCntPerPage+1);
+			//만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한페이지 번호를 1로 세팅하기
+			if(myPayCheckCnt<beginRowNo) salListSearchDTO.setSelectPageNo(1);
+			
+		}
+
+
 		System.out.println("급여 컨트롤러 시작");
 		
 		List<SalaryDTO> myPayCheckList = this.hrservice.getSalaryInfo(salListSearchDTO);
 		
 		System.out.println("컨트롤러 급여명세서 조회 성공");
-
+		
+		
 		mav.addObject("myPayCheckList", myPayCheckList);
 		//mav.addObject("salListSearchDTO", salListSearchDTO);
 		mav.addObject("myPayCheckCnt", myPayCheckCnt);
 
 		mav.addObject("timeDTO", timeDTO);
-
+		
 		return mav;
 
 	}

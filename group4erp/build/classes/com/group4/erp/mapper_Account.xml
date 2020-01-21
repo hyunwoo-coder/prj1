@@ -34,7 +34,6 @@
 	</sql>
 
 
-
 	<sql id="whereCondition">
 		<if test="searchKeyword !=null and searchKeyword.length()>0">
 				and (
@@ -81,11 +80,13 @@
 		</if>
 	</sql>
 
+
 	<select id='getCorpListCnt' parameterType="com.group4.erp.CorpSearchDTO" resultType="int">
 		select count(*) from corporation_cus cc
 		where 1=1
 		and cc.is_on_business='y'
 		<include refid="whereCondition" />
+
 	</select>
 	
 	
@@ -98,7 +99,7 @@
 				cc.corp_addr "corp_addr",
 				cc.corp_fax "corp_fax",
 				cc.corp_tel "corp_tel",
-				cc.corp_business_area "corp_business_area",
+				cc.corp_business_area "corp_business_area", 
 				(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) "corp_business_name",
 				cc.is_on_business "is_on_business",
 				cc.reg_dt "reg_dt"
@@ -111,7 +112,9 @@
 		where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
 	</select>
 	
+
 	
+
 	
 	<select id='getCorpInfo' parameterType="String" resultType="com.group4.erp.CorporationDTO">
 		
@@ -265,8 +268,19 @@
 	</select>
 	
 	<select id="getTranSpecIssueCnt" resultType="int">
-		select count(*) from tran_issue_info
-	
+		<!-- select count(*) from tran_issue_info where 1=1 -->
+		select count(*) from (
+        		select 
+					ti.issue_no "ISSUE_NO",
+					ti.order_no||'' "ORDER_NO",
+					ti.corp_no "CORP_NO",
+					(select c.corp_name from corporation_cus c where c.corp_no = ti.corp_no) "CORP_NAME",
+					(select c.ceo_name from corporation_cus c where c.corp_no = ti.corp_no) "CEO_NAME",
+					ti.order_dt "ORDER_DT",
+					to_char(ti.issue_dt, 'yyyy.mm.dd')|| '('||to_char(ti.issue_dt, 'dy', 'nls_date_language=Korean' )||')' "ISSUE_DT"
+				from tran_issue_info ti 
+			) where 1=1
+		<include refid="TranSpecIssueWhere" />
 	</select>
 	
 	
@@ -325,7 +339,7 @@
 	
 	
 	<insert id="saveTempTranSpec" parameterType="com.group4.erp.TranSpecDTO">
-		insert into tran_issue_info (
+		insert into  (
 			issue_no,
 			order_no,
 			corp_no,

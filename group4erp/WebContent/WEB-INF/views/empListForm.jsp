@@ -207,6 +207,9 @@ $(document).ready(function(){
 		<br>
 		<!-- <input type="button" value="신규사원등록" onClick="insertNewEmp();"> -->
 		<br><br>
+		<c:if test="${getEmpBoardListCnt eq 0}">
+				<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	</form>
 
