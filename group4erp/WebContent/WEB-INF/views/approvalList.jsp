@@ -64,7 +64,7 @@
 
 
 
-	function updateApprovalInfo(idx, e_works_no, document_no, approval_state, e_work_comment) {
+	function 	(idx, e_works_no, document_no, approval_state, e_work_comment) {
 		
 		var thisTr = $(idx);
 		var delTr = $('.approvalReqList [name=test]');
@@ -145,14 +145,14 @@
 				if(delCnt==1) {
 					alert("이벤트 결재 삭제 성공!");
 					
-					location.replace("/group4erp/viewApprovalList.do");
+					location.href="/group4erp/viewApprovalList.do";
 				} else if(delCnt==0) {
 					alert("이벤트 결재 삭제 실패");
 
 				} else if(delCnt==-1) {	
 					//alert("업체가 이미 삭제되었습니다!");
 					
-					location.replace("/group4erp/viewApprovalList.do");
+					location.href="/group4erp/viewApprovalList.do";
 
 				} else {
 					alert("서버쪽 DB 연동 실패!");

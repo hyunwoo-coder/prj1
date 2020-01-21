@@ -143,14 +143,14 @@
 				&& 
 				(travel_payment =="W")){
 						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-						location.replace("/group4erp/businessTripUpDelForm.do?"+str )
+						location.href="/group4erp/businessTripUpDelForm.do?"+str;
 					}else{
 						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-						location.replace("/group4erp/businessTripContentsForm.do?"+str )}
+						location.href="/group4erp/businessTripContentsForm.do?"+str;}
 	}
 
 	function goBusinessTripForm() {
-		location.href = "/group4erp/businessTripForm.do";
+		location.href="/group4erp/businessTripForm.do";
 	}
 	
 </script>
