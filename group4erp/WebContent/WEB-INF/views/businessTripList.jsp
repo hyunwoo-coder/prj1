@@ -36,7 +36,7 @@
 </style>
 <script>
 	$(document).ready(function(){
-
+		
 		setTableTrBgColor(
 				"businessTripListTable",	//테이블 class 값
 				"${headerColor}",			//헤더 tr 배경색
@@ -142,11 +142,11 @@
 				) 
 				&& 
 				(travel_payment =="W")){
-				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripUpDelForm.do?"+str )
-			}else{
-				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripContentsForm.do?"+str )}
+						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+						location.replace("/group4erp/businessTripUpDelForm.do?"+str )
+					}else{
+						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+						location.replace("/group4erp/businessTripContentsForm.do?"+str )}
 	}
 
 	function goBusinessTripForm() {

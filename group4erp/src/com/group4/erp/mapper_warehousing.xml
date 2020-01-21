@@ -65,23 +65,24 @@
 	
 		<if test="wh_keyword!=null and wh_keyword.length()>0 ">
 	      and(
-	      	upper((select emp_name from employee where emp_no = (select emp_no from books_inven_order_info where order_inven_no = w.order_inven_no))) like upper('%${wh_keyword}%')
-	        or upper( (select order_stock_cnt from books_inven_order_info where order_inven_no = w.order_inven_no ) ) like upper('%${wh_keyword}%')
-	        or upper((select supply_rate from books_inven_order_info where order_inven_no = w.order_inven_no )) like upper('%${wh_keyword}%')
-	        or upper((select cost from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper('%${wh_keyword}%')
-	        or upper((select order_dt from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper ('%${wh_keyword}%')
-	        or upper((select branch_name from code_branch where branch_cd = (select branch_cd from books_inven_order_info where order_inven_no = w.order_inven_no))) like upper('%${wh_keyword}%')
-	        or upper((select store_req_dt from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper('%${wh_keyword}%')
-	        or upper((select book_name from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  )) like upper('%${wh_keyword}%')
-	        or upper((select publisher from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  )) like upper('%${wh_keyword}%')
-	        or upper((select cat_name from CODE_CATEGORY where cat_cd = (select cat_cd from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no )) )) like upper('%${wh_keyword}%')
-	      )
+              upper((select emp_name from employee where emp_no = (select emp_no from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)))) like upper('%${wh_keyword}%')
+              or upper((select order_stock_cnt from books_inven_order_info where order_inven_no = w.order_inven_no )) like upper('%${wh_keyword}%')
+              or upper((select supply_rate from books_inven_order_info where order_inven_no = w.order_inven_no )) like upper('%${wh_keyword}%')
+              or upper((select cost from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper('%${wh_keyword}%')
+              or upper((select to_char(order_dt,'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper ('%${wh_keyword}%')
+              or upper((select branch_name from code_branch where branch_cd = (select branch_cd from books_inven_order_info where order_inven_no = w.order_inven_no))) like upper('%${wh_keyword}%')
+              or upper((select to_char(store_req_dt,'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper('%${wh_keyword}%')
+              or upper((select book_name from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  )) like upper('%${wh_keyword}%')
+              or upper((select publisher from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  )) like upper('%${wh_keyword}%')
+              or upper((select cat_name from CODE_CATEGORY where cat_cd = (select cat_cd from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no )) )) like upper('%${wh_keyword}%')
+              or upper(to_char(w.wh_dt,'YYYY-MM-DD (DY)', 'NLS_DATE_LANGUAGE=KOREAN')) like upper('%${wh_keyword}%')
+              or upper(w.wh_no) like upper('%${wh_keyword}%')
+              or upper(w.order_inven_no) like upper('%${wh_keyword}%')
+         )
 		</if>
 		
 	</sql> 
     
-
-	
 	<select id="getWarehousingListCnt" parameterType="com.group4.erp.WarehousingSearchDTO" resultType="int">
 		select count(*) from warehousing_info w where 1=1 <include refid="warehousingList"></include>
 	</select>
