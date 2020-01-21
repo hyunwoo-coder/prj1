@@ -22,8 +22,6 @@
 				"${evenTrColor}",	//짝수행 배경색
 				"${mouseOverColor}"			//마우스 온 시 배경색
 			);
-
-
 		$("[name=rowCntPerPage]").change(function() {
 			goSearch();
 			//document.corpSearchRowPageForm.submit();
@@ -35,7 +33,7 @@
 					,"${corpSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
 					,"${corpSearchDTO.rowCntPerPage}"		//페이지 당 출력행의 개수
 					,"10"										//페이지 당 보여줄 페이지번호 개수
-					,"goPage();"						//페이지 번호 클릭 후 실행할 자스코드
+					,"goSearch();"						//페이지 번호 클릭 후 실행할 자스코드
 				)
 			);
 
@@ -49,14 +47,7 @@
 		</c:forEach>
 
 	});
-	function goPage() {
-		document.corpSearchForm.submit();
-	}
-
 	function goSearch() {
-		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
-		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
-		$("[name=corpSearchForm] [name=sort]").val('');
 		document.corpSearchForm.submit();
 	}
 	
@@ -223,8 +214,8 @@
 	<form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
 		<!-- 검색 테스트중 -->
 			
-     	<input type="text" name="selectPageNo">
-     	<input type="text" name="sort">
+     	<input type="hidden" name="selectPageNo">
+     	<input type="hidden" name="sort">
 		
 		<table border="0" cellpadding="5" cellspacing="5">
 			<tr valign="top">
