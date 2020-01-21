@@ -64,7 +64,7 @@
 
 
 
-	function 	(idx, e_works_no, document_no, approval_state, e_work_comment) {
+	function updateApprovalInfo(idx, e_works_no, document_no, approval_state, e_work_comment) {
 		
 		var thisTr = $(idx);
 		var delTr = $('.approvalReqList [name=test]');
