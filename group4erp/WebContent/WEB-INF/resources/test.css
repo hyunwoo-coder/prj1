@@ -7,22 +7,24 @@ body {
       background: white;
       font-family: 'Noto Sans KR', sans-serif;
 }
+
 .tab, .tab td, .tab th{
    border-collapse: collapse;
    padding:5px;
-   border-top:1px solid #C0C0C0;
-   border-bottom:1px solid #C0C0C0;
+   border-top:1px solid white;
+   border-bottom:1px solid white;
    border-left:0px;
    border-right:0px;
    font-size:12pt;
    font-family: 'Noto Sans KR', sans-serif;
    /* background-color: white; */
 /*    font-weight:350; */
+	/*text-align: right;*/
 }
 
 .tab2, .tab2 td, .tab2 th{
    border-collapse: collapse;
-   border:1px solid #C0C0C0;
+   border:1px solid #ddd;
    padding:5px;
    font-size:12pt;
    font-family: 'Noto Sans KR', sans-serif;
@@ -30,8 +32,7 @@ body {
 
 .tab3{
    border-collapse: collapse;
-   border:0px solid #C0C0C0;
-   border:0;
+   border:0px solid white;
    padding:5px;
    font-size:12pt;
    font-family: 'Noto Sans KR', sans-serif;
@@ -112,7 +113,7 @@ h1{
 
 
 
-button{
+/* button{
   background:gray;
   color:#fff;
   border:none;
@@ -148,6 +149,6 @@ button:after{
 button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
-}
+} */
 
 

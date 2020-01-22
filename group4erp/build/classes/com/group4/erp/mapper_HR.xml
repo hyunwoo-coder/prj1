@@ -220,23 +220,23 @@
 		select 
 			to_char(salary_dt, 'yyyy.mm.dd')|| '('||to_char(salary_dt, 'dy', 'nls_date_language=Korean' )||')' "salary_dt",
 			emp_no "emp_no",
-			to_char(real_sal,'999,999,999,999')||'원' "real_sal",
-			to_char(month_sal,'999,999,999,999')||'원' "month_sal",
-			to_char(mess_allowance,'999,999,999,999')||'원' "mess_allowance",
-			to_char(bus_trip_bonus,'999,999,999,999')||'원' "bonus",
-			to_char(sum_payable,'999,999,999,999')||'원' "sum_payable",
-			to_char(pension,'999,999,999,999')||'원' "pension",
-			to_char(health,'999,999,999,999')||'원' "health",
-			to_char(emp_insurance,'999,999,999,999')||'원' "emp_insurance",
-			to_char(deduct,'999,999,999,999')||'원' "deduct"
+			real_sal "real_sal",
+			month_sal "month_sal",
+			mess_allowance "mess_allowance",
+			bus_trip_bonus "bonus",
+			sum_payable "sum_payable",
+			pension "pension",
+			health "health",
+			emp_insurance "emp_insurance",
+			deduct "deduct"
 		from state_of_payment			  
     	where 1=1
     	and emp_no = '${emp_no}'  
     	<if test="sort!=null and sort.length() > 0" >
 			order by ${sort}
 		</if>
-		<if test="sort==null">
-			order by salary_dt desc
+		<if test="sort==null || sort.length()==0">
+			order by 1 desc
 		</if>
     	
     ) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>

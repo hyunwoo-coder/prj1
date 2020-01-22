@@ -27,6 +27,9 @@
 	<!-- 	                   주로 css, 이미지, js  파일을 URL 로 접근 불가능한 경로에 숨겨 사용할 때 설정함.   -->
 	<!--****************************************************************************************-->
 	<resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	<resources mapping="/resources/lib/**" location="/WEB-INF/resources/lib/" />
+	<resources mapping="/resources/img/**" location="/WEB-INF/resources/img/" />
+	<resources mapping="/resources/css/**" location="/WEB-INF/resources/css/" />
 	
 	<!--****************************************************************************************-->
 	<!--파일업 로드를 관리하는 [CommonsMultipartResolver 객체] 정보 등록  -->
@@ -56,10 +59,11 @@
 	<!-- 	단 [서비스 클래스]는 @Service 가 붙어야함-->
 	<!-- 	단 [DAO 클래스]는 @Repository 가 붙어야함-->
 	<!--****************************************************************************************-->
-	<context:component-scan base-package="com.group4.erp" /> 
-	<context:component-scan base-package="com.group4.client" /> 
+
+	<context:component-scan base-package="com.group4.erp" />
+	<context:component-scan base-package="com.group4.client" />  
+
 	
-		
 	<!--**********************************************************************************************-->
 	<!-- 현재 이 스프링 설정 파일 안에서 bean 태그로 등록된 [서비스 클래스] 또는 [DAO 클래스]의 클래스명 앞, 메서드 앞에  -->
 	<!-- @Transactional 붙여 [트랜잭션]을 처리하도록 해주는 객체들을 등록하기. -->

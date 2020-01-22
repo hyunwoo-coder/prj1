@@ -108,6 +108,15 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/goMainTest.do")
+	   public ModelAndView goMainTest(HttpSession session) {
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.setViewName("test.jsp");
+	      //mav.addObject("subMenu", "mainPage");
+	      return mav;
+	   }
+	
 	@RequestMapping(value="/checkApprovalProc.do")
 	@ResponseBody
 	public EmpApprovalCheckDTO joinMembership(

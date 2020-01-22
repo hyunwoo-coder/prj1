@@ -1,12 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file ="/WEB-INF/views/common.jsp" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>거래명세서</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <meta http-equiv="Conpatible" content="no-cache"/>
+  <title>Dashio - Bootstrap Admin Template</title>
+
+  <!-- Favicons -->
+  <link href="${ctRootImg}/favicon.png" rel="icon">
+  <link href="${ctRootImg}/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="${ctRootlib}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="${ctRootlib}/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="${ctRootcss}/style.css" rel="stylesheet">
+  <link href="${ctRootcss}/style-responsive.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
 
 <script>
 
@@ -46,44 +72,324 @@
 
 </script>
 
-</head>
-<body><center>
-	<h1>거래명세서</h1>
-	
-	
-		<table class="tranSpecTable tab" style="background:white;" name="tranSpecTable" cellpadding="5" cellspacing="5" width="500">
 
-		<c:forEach items="${tranSpecList}" var="tranSpecList" varStatus="loopTagStatus">
-			<tr>
-				<td rowspan="5" width="100">공급받는자</td><td width="100">상호</td><td>${tranSpecList.corp_name} </td>
-			</tr>
-				<tr><td>사업자번호</td><td name="corp_no">${tranSpecList.corp_no} </td></tr>
-				<tr><td>사업자명</td><td name="ceo_name">${tranSpecList.ceo_name}</td></tr>
-				<tr><td>소재지</td><td name="corp_addr">${tranSpecList.corp_addr}</td></tr>
-				<tr><td>연락처</td><td name="corp_tel">${tranSpecList.corp_tel}</td></tr>
-				<tr><td>FAX</td><td name="corp_fax">${tranSpecList.corp_fax}</td></tr>
-				
-				<tr><td>거래일시</td><td colspan="2" name="order_dt">${tranSpecList.order_dt}</td></tr>
-				<tr><td>품명</td><td colspan="2" name="book_name">${tranSpecList.book_name} &nbsp;(isbn : ${tranSpecList.isbn13})</td></tr>
-				<tr><td>주문번호</td></td><td colspan="2" name="order_books_no"> ${tranSpecList.order_books_no}</td></tr>
-				<tr><td>수량</td><td colspan="2" name="qty">${tranSpecList.books_qty} 권</td></tr>
-				<tr><td>단가</td><td colspan="2" name="unit_price">${tranSpecList.book_price} 원</td></tr>
-				<tr><td>공급가액</td><td colspan="2">${tranSpecList.tot_cost} 원</td></tr>	
-				<%-- <tr><td>부가세액</td><td colspan="2">${tranSpecList.tax} 원</td></tr> --%>	
-			</c:forEach>		
-		</table>
-	
-	
-	<!-- <input type="button" value="임시저장" onClick="saveTempTranSpec('${order_no}');"> -->
-	<input type="button" value="발급" onClick="issueTranSpec('${order_no}');">
-	<input type="button" value="인쇄" onClick="printPage();">
-	<br>
-	
-	<form name="issueTranSpecForm" method="post" action="/group4erp/issueTranSpec.do">
-		<input type="hidden" name="order_no" value="${order_no}">
-	</form>
-	
-</center>
+<body>
+  <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+          <!-- settings start -->
+          <!-- notification dropdown end -->
+          <li>
+     		 <table>
+        		 <tr>
+        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
+         		</tr>
+      		</table>
+          </li>
+        </ul>
+        <!--  notification end -->
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li>
+            <a class="logout" href="/group4erp/logout.do">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered">
+            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+          </p>
+          <h5 class="centered">Sam Soffes</h5>
+          <li class="mt">
+            <a href="/group4erp/goMainTest.do">
+              <i class="fa fa-dashboard"></i>
+              <span>메인페이지</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span>업무 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goMyCareBookList.do"><i class="fa fa-book"></i>담당 도서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
+              </li>
+              <li>
+                <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
+              </li>
+              <li>
+                <a href="/group4erp/goEmpDayOffjoin.do"><i class="fa fa-edit"></i>휴가 신청</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-shopping-cart"></i>
+              <span>재고 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goBookList.do"><i class="fa fa-info-circle"></i>도서정보조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReleaseList.do"><i class="fa fa-list"></i>출고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goWarehousingList.do"><i class="fa fa-list"></i>입고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReturnOrderList.do"><i class="fa fa-list"></i>반품현황조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-calendar"></i>
+              <span>마케팅 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewSalesInfoList.do"><i class="fa fa-money"></i>판매현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEventList.do"><i class="fa fa-gift"></i>이벤트행사 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-users"></i>
+              <span>인사 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a class="active" href="javascript:;">
+              <i class="fa fa-krw"></i>
+              <span>회계 관리</span>
+              </a>
+            <ul class="sub">
+              <li class="active">
+                <a href="/group4erp/viewTranSpecIssueList.do"><i class="fa fa-list"></i>거래명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewTranSpecList.do"><i class="fa fa-file-text"></i>사업자 거래내역 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewCorpList.do"><i class="fa fa-link"></i>거래처 현황 조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class=" fa fa-bar-chart-o"></i>
+              <span>전략 분석</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewBestKeywdAnalysis.do"><i class="fa fa-search"></i>키워드 검색 자료 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewOurCompanyReport.do"><i class="fa fa-building-o"></i>회사현황</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <div class="col-lg-12 mt">
+          <div class="row content-panel">
+            <div class="col-lg-10 col-lg-offset-1">
+              <div class="invoice-body">
+                <div class="pull-left" align=left>
+                  <h1>BOOKST</h1>
+                  <address>
+                <strong>KOSMO, Inc.</strong><br>
+                서울특별시 금천구 가산동 426-5<br>
+                409호<br>
+                <abbr title="Phone">P:</abbr> 123-456-7890
+              </address>
+                </div>
+                <!-- /pull-left -->
+                <div class="pull-right">
+                  <h2>거래 명세서</h2>
+                </div>
+                <!-- /pull-right -->
+                <div class="clearfix"></div>
+                <br>
+                <br>
+                <br>
+                <div class="row">
+                  <div class="col-md-9" align=left>
+                    <h4>${tranSpecList.corp_name}</h4>
+                    <address>
+                  <strong>${tranSpecList.corp_no} Corp.</strong><br>
+                  ${tranSpecList.corp_addr}<br>
+                  <abbr title="Phone">P:</abbr>${tranSpecList.corp_tel}
+                  <abbr title="Fax">F:</abbr>${empty tranSpecList.corp_fax?'없음':tranSpecList.corp_fax}
+                </address>
+                  </div>
+                  <!-- /col-md-9 -->
+                  <div class="col-md-3">
+                    <br>
+                    <div>
+                      <div class="pull-left"> 주문 번호 : </div>
+                      <div class="pull-right"> ${tranSpecList.order_books_no} </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div>
+                      <!-- /col-md-3 -->
+                      <div class="pull-left"> 주문 날짜 : </div>
+                      <div class="pull-right"> ${tranSpecList.order_dt} </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <!-- /row -->
+                    <br>
+                    <div class="well well-small green">
+                      <div class="pull-left"> 원가 : </div>
+                      <div class="pull-right"> ${tranSpecList.tot_cost} 원</div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                  <!-- /invoice-body -->
+                </div>
+                <!-- /col-lg-10 -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width:60px" class="text-center">수량</th>
+                      <th class="text-left">품목</th>
+                      <th style="width:140px" class="text-right">단가</th>
+                      <th style="width:90px" class="text-right">합계</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">${tranSpecList.books_qty}</td>
+                      <td align=center>${tranSpecList.book_name} &nbsp;(isbn : ${tranSpecList.isbn13})</td>
+                      <td class="text-right">${tranSpecList.book_price} 원</td>
+                      <td class="text-right">${tranSpecList.tot_cost} 원</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" rowspan="4">
+                        <h4>Terms and Conditions</h4>
+                        <p>저희 회사와 거래해주셔서 감사합니다. 거래명세서가 발급된 순간으로부터 한달 이내에 결제를 해주셔야 합니다.
+                        연체시 월 1.5%의 연체료가 부과됩니다.</p>
+                        <td class="text-right"><strong>세액</strong></td>
+                        <td class="text-right">- ${tranSpecList.tax} 원</td>
+                    </tr>
+                    <tr>
+                      <td class="text-right no-border"><strong>배송료</strong></td>
+                      <td class="text-right">+ 0 원</td>
+                    </tr>
+                    <tr>
+                      <td class="text-right no-border">
+                        <div class="well well-small green"><strong>총액</strong></div>
+                      </td>
+                      <td class="text-right"><strong>${tranSpecList.tradeTot}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <input type="button" value="발급" onClick="issueTranSpec('${order_no}');">
+                <br>
+              </div>
+              <!--/col-lg-12 mt -->
+              <form name="issueTranSpecForm" method="post" action="/group4erp/issueTranSpec.do">
+				<input type="hidden" name="order_no" value="${order_no}">
+			</form>
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+			KOSMO 자바&빅데이터 과정 팀프로젝트
+        </p>
+        <div class="credits">
+        <font style="font-size:12pt;">
+        ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
+         </font>
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+        </div>
+        <a href="basic_table.html#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
+  <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="${ctRootlib}/jquery.scrollTo.min.js"></script>
+  <script src="${ctRootlib}/jquery.nicescroll.js" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script src="${ctRootlib}/common-scripts.js"></script>
+  <!--script for this page-->
 
 </body>
+
 </html>

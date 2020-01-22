@@ -29,6 +29,8 @@ function is_empty(selector) {
 	}
 }
 
+      
+
 
 function getPagingNumber(
 		totRowCnt               // 검색 결과 총 행 개수
@@ -207,15 +209,18 @@ function inputData(selector, data) {
 	try {
 		//selector가 가리키는 입력양식을 관리하는 JQuery 객체 생성하기
 		var obj = $(selector);
+		
 		//selector가 가리키는 입력양식이 없다면 경고하고 함수 중단
 		if(obj.length==0) {
 			alert("inputData("+selector+", "+data+") 함수 호출 시 ["+selector+"]란 선택자가 가리키는 입력양식이 없습니다.");
 			return;
 		}
+		
 		//만약 입력양식이 checkbox 또는 radio면
 		//value 값으로 data 안의 데이터를 가진 놈을 체크하기
 		if(obj.is(":checkbox") || obj.is(":radio")) {
 			obj.filter("[value='"+data+"']").prop("checked", true);
+			
 		}
 		//만약 입력양식이 checkbox 또는 radio가 아니면
 		//입력양식의 value 값으로 매개변수 data 안의 데이터를 삽입하기
@@ -226,10 +231,6 @@ function inputData(selector, data) {
 	} catch(e) {
 		alert("inputData('"+seletor+"', '"+data+"') 함수 호출 시 에러 발생!");
 	}
-}
-
-function numberFormat(inputNumber) {
-	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 //jQuery 실습 때 했던 짝수행 홀수행에 음영 색상 설정

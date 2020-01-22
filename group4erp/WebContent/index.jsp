@@ -7,7 +7,7 @@
 <script>
 	location.replace("/group4erp/loginForm.do");
 </script>
-<title>YES4조 전사적자원관리 시스템</title>
+<title>YES2 4조 전사적자원관리 시스템</title>
 </head>
 <body>
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file = "/WEB-INF/views/common.jsp" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,41 +82,6 @@
 		<input type="hidden" name="selectPageNo">
 		<input type="hidden" name="sort">
 
-	
-		<table class="tab" cellpadding="5" cellspacing="5">
-			<tr>			
-				<td align="right">
-	        	[전체] : ${myPayCheckCnt}건&nbsp;&nbsp;&nbsp;&nbsp;
-	           	 <select name="rowCntPerPage">
-	              		<option value="10">10</option>
-	               		<option value="15">15</option>
-	               		<option value="20">20</option>
-	               		<option value="25">25</option>
-	               		<option value="30">30</option>
-	            	</select> 행보기
-	    		</td>
-
-
-		
-		<table>
-			<tr height=10>
-				<td></td>
-
-			</tr>
-
-			</form>
-			<tr>
-				<td>
-					<table class="empSalInfo tab" cellpadding="5" cellspacing="5">
-
-		</table>
-			
-		<input type="hidden" name="selectPageNo">
-		<input type="hidden" name="sort">
-
-		
-	
-	
 	<table name="outerBorder" cellpadding="5" cellspacing="5">
 		<tr>			
 			<td align="right">
@@ -269,23 +235,23 @@
 						<tr align="center">	
 							<td>${myPayCheckCnt - myPayCheckList.RNUM +1}</td>
 							<td>${myPayCheckList.salary_dt}</td>
-							<td>${myPayCheckList.month_sal}</td>
-							<td>${myPayCheckList.mess_allowance}</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.month_sal}" />원</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.mess_allowance}" />원</td>
 							<td>
 								<c:if test="${myPayCheckList.bus_trip_bonus eq null}">
-									0
+									0원
 								</c:if>
 					
 								<c:if test="${!(myPayCheckList.bus_trip_bonus eq null)}">
-									${myPayCheckList.bus_trip_bonus}
+									<fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.bus_trip_bonus}" />원
 								</c:if>
 							</td>
-							<td>${myPayCheckList.sum_payable}</td>
-							<td>${myPayCheckList.emp_insurance}</td>
-							<td>${myPayCheckList.health}</td>
-							<td>${myPayCheckList.pension}</td> 
-							<td>${myPayCheckList.deduct} </td>
-							<td>${myPayCheckList.real_sal}</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.sum_payable}" />원</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.emp_insurance}" />원</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.health}" />원</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.pension}" />원</td> 
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.deduct}" />원</td>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.real_sal}" />원</td>
 						</tr>
 		
 					 </c:forEach>

@@ -39,6 +39,9 @@
 <c:set var="ctRoot" value="/group4erp" />
 
 <c:set var="ctRootImage" value="${ctRoot}/resources/image"/>
+<c:set var="ctRootImg" value="${ctRoot}/resources/img"/>
+<c:set var="ctRootcss" value="${ctRoot}/resources/css"/>
+<c:set var="ctRootlib" value="${ctRoot}/resources/lib"/>
 
 
 <!-- css 파일 & jquery 라이브러리 파일 수입 -->

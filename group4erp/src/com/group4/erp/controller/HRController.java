@@ -81,46 +81,72 @@ public class HRController {
 	}
 
 	@RequestMapping(value = "/viewSalList.do")
-	public ModelAndView viewSalList(HttpSession session, SalListSearchDTO salListSearchDTO) {
+	   public ModelAndView viewSalList(HttpSession session, SalListSearchDTO salListSearchDTO) {
 
-		ModelAndView mav = new ModelAndView();
+	      ModelAndView mav = new ModelAndView();
 
-		try {
+	      try {
 
-			int emp_tot_cnt = this.hrservice.getEmpListAllCnt(salListSearchDTO);
+	         int emp_tot_cnt = this.hrservice.getEmpListAllCnt(salListSearchDTO);
 
-			System.out.println("emp_tot_cnt==" + emp_tot_cnt);
+	         System.out.println("emp_tot_cnt==" + emp_tot_cnt);
 
-			List<SalaryDTO> empSalList = this.hrservice.getEmpSalList(salListSearchDTO);
+	         List<SalaryDTO> empSalList = this.hrservice.getEmpSalList(salListSearchDTO);
 
-			TimeDTO timeDTO = this.hrservice.getTime();
+	         TimeDTO timeDTO = this.hrservice.getTime();
 
-			if (emp_tot_cnt > 0) {
-				int selectPageNo = salListSearchDTO.getSelectPageNo(); // 선택한 페이지 번호 구하기
-				int rowCntPerPage = salListSearchDTO.getRowCntPerPage(); // 한 화면에 보여지는 행의 개수 구하기
-				int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage + 1; // 검색할 시작행 번호 구하기
-				if (emp_tot_cnt < beginRowNo) { // 만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한 페이지 번호를 1로 지정
+	         if (emp_tot_cnt > 0) {
+	            int selectPageNo = salListSearchDTO.getSelectPageNo(); // 선택한 페이지 번호 구하기
+	            int rowCntPerPage = salListSearchDTO.getRowCntPerPage(); // 한 화면에 보여지는 행의 개수 구하기
+	            int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage + 1; // 검색할 시작행 번호 구하기
+	            if (emp_tot_cnt < beginRowNo) { // 만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한 페이지 번호를 1로 지정
 
-					salListSearchDTO.setSelectPageNo(1);
-				}
-			}
-			
+	               salListSearchDTO.setSelectPageNo(1);
+	            }
+	         }
+	         
+	         
+	         String sal_chart_data = "[";
+	         sal_chart_data += "['직급', '평균연봉']";
+	      
+	         List<SalaryDTO> avgSalInfo = this.hrservice.getAvgSalChart();
 
-			mav.setViewName("main.jsp");
-			mav.addObject("salListSearchDTO", salListSearchDTO);
-			mav.addObject("empSalList", empSalList);
-			mav.addObject("timeDTO", timeDTO);
+	         for (int i = 0; i < avgSalInfo.size(); i++) {
+	            if(avgSalInfo.get(i).getJikup() == null || avgSalInfo.get(i).getJikup() =="") {
+	            	continue;
+	            }
+	               // System.out.print(salaryList.get(i).get("jikup"));
+	               sal_chart_data += ", ['";
+	               sal_chart_data += avgSalInfo.get(i).getJikup();
+	               sal_chart_data += "', ";
+	               sal_chart_data += avgSalInfo.get(i).getAvg_salary();
+	               sal_chart_data += "] ";
+	            
+	               
+	         }
+	         sal_chart_data += "]";
 
-			mav.addObject("emp_tot_cnt", emp_tot_cnt);
-			mav.addObject("subMenu", "viewSalList");
-			mav.addObject("navigator", "[인사관리] → [급여지급현황]");
+	         System.out.println(sal_chart_data);
+	         // obj.put("chartName", "직원평균연봉정보");
 
-		} catch (Exception e) {
-			System.out.println("예외발생==" + e);
-		}
+	         mav.addObject("sal_chart_data", sal_chart_data);
+	         
 
-		return mav;
-	}
+	         mav.setViewName("main.jsp");
+	         mav.addObject("salListSearchDTO", salListSearchDTO);
+	         mav.addObject("empSalList", empSalList);
+	         mav.addObject("timeDTO", timeDTO);
+
+	         mav.addObject("emp_tot_cnt", emp_tot_cnt);
+	         mav.addObject("subMenu", "viewSalList");
+	         mav.addObject("navigator", "[인사관리]-[급여지급현황]");
+
+	      } catch (Exception e) {
+	         System.out.println("예외발생==" + e);
+	      }
+
+	      return mav;
+	   }
 	
 	//급여명세서(개인별) 조회 기능
 	@RequestMapping(value="/viewEmpSalInfo.do")

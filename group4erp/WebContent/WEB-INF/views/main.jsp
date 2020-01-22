@@ -15,13 +15,15 @@
 <%--<header width=95%><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></header> --%>
 <body><center>
 
-<table border="0" cellpadding="0" cellspacing="0" style="background-image : url('/group4erp/resources/image/bookImage.jpg'); 
-		background-repeat:no-repeat; 
-		background-size:cover;
-		background-attachment:fixed; " >
-	<tr height="35">
-		<td align="center"><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></td>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+<%-- 
+	<tr>
+		<td width="100%"><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></td>
 	</tr>
+	<tr height="100">
+		<td>
+		</td>
+	</tr> --%>
 	<tr class="main" valign="top" height="700px" >
 		<td align="center">
 		<!-- <section> -->
@@ -224,9 +226,6 @@
 
 		</td>
 	</tr>
-	<tr height="40">
-		<td align="center"><%@ include file ="/WEB-INF/views/footer.jsp" %></td> 
-	</tr> 
 
 </table>
 

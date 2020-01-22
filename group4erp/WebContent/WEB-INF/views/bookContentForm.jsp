@@ -1,30 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file = "/WEB-INF/views/common.jsp" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<title>YES4조 전사적자원관리 시스템 </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <title>Dashio - Bootstrap Admin Template</title>
+
+  <!-- Favicons -->
+  <link href="${ctRootImg}/favicon.png" rel="icon">
+  <link href="${ctRootImg}/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="${ctRootlib}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="${ctRootlib}/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="${ctRootcss}/style.css" rel="stylesheet">
+  <link href="${ctRootcss}/style-responsive.css" rel="stylesheet">
+
+
+
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
 <style>
-	.line{
-			border-collapse: collapse;
-			padding:5px;
-			border-top:0px;
-			border-bottom:5px solid black;
-			border-left:0px;
-			border-right:0px;
-			font-size:11pt;
-			font-family: 'Noto Sans KR', sans-serif;
-		}
-	
-	.fileBox .fileName {display:inline-block;width:190px;height:20px;padding-left:10px;margin-right:5px;line-height:30px;border:1px solid #aaa;background-color:#fff;vertical-align:middle}
-	.fileBox .btn_file {display:inline-block;border:1px solid #000;width:100px;height:20px;font-size:0.8em;line-height:20px;text-align:center;vertical-align:middle; background-color:black; color:white;}
-	.fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);}
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger{cursor: pointer;}
 /*datepicer input 롤오버 시 손가락 모양 표시*/
@@ -46,6 +56,7 @@
    border-width: thin;
 }
 </style>
+
 <script>
 
 var basePrice = null;
@@ -53,6 +64,8 @@ var basePages = null;
 var baseCnt = null;
 
 $(document).ready(function(){
+	
+	startTime();
 	
 	$("#published_dt").datepicker({
 		dateFormat: 'yy-mm-dd'
@@ -76,9 +89,13 @@ $(document).ready(function(){
 	}
 	
 	function bookInfoUp(){
-		alert( $('[name=bookContentUp]').serialize() );
+		//alert( $('[name=bookContentUpB]').serialize() );
 		//return;
 	
+		var bookContentUp = $('[name=bookContentUpA]').serialize()+"&"+$('[name=bookContentUpB]').serialize();
+		
+		alert(bookContentUp);
+		
 		if( is_empty('[name=book_name]') ){
 			alert("책 제목을 입력해주세요.");
 			$("[name=book_name]").focus();
@@ -142,11 +159,7 @@ $(document).ready(function(){
 		
 		
 		var checkPirce = $('[name=book_price]').val();
-		if(checkPirce.indexOf(',')>0){
-			var num = checkPirce.replace(',','');
-			$('[name=book_price]').val(num);
-		}
-		else if(isNaN(checkPirce)==true){
+		if(isNaN(checkPirce)==true){
 			alert("책 가격은 숫자만 기입해주세요");
 			//$('[name=book_price]').val();
 			return;
@@ -184,7 +197,7 @@ $(document).ready(function(){
 		$.ajax({
 			url : "/group4erp/goBookInfoUpProc.do"
 			, type : "post"
-			, data : $('[name=bookContentUp]').serialize()
+			, data : bookContentUp
 			, success : function(upCnt){
 				if(upCnt==1){
 					alert('책 수정 성공');
@@ -206,61 +219,230 @@ $(document).ready(function(){
 	}
 
 </script>
-
-</head>
 <body>
-<cneter>
-<b>서적 상세보기</b>
-	<br>
-	<table border=0 width=850>
-	 	<tr>
-	 	<td align=right>
-			<a style="font-size:30px; color:black" href="javascript:goBack();">⬅</a>
-		</td>
-		</tr>
-	</table>
-		
-	<form name="bookContentUp" method="post" enctype="multipart/form-data">
-		
-		<table class="line" width="850">
-			<tr>
-				<td>&nbsp;&nbsp;<b>서적 정보</b></td>
-			</tr>
-		</table>
-		
-		<table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
-				
-			<tr>
-				<td rowspan="6" colspan="2" width="20%">
-				<%-- <c:if test="${employeeInfoUpDTO.emp_pic='emp0000.jpg'}"> --%>
-					<img src="${ctRootImage}/book.png" width="100%" height="150">
-				<%-- </c:if> --%>
-					<%-- <img src="${ctRootImage}/emp_0003.jpg" width="100%" height="150"> --%>
-				<!-- <img src="../image/emp_0002.jpg"> --></td>
-				<td bgcolor="#EEEEEE">책 이름</td>
-				<td colspan="3"><input type="text" name="book_name" size="83" value="${bookInfo.book_name}"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE" width="12%">책번호</td>
-				<td width="28%">${bookInfo.isbn13}</td>
-				<input type="hidden" name="isbn13" value="${bookInfo.isbn13}">
-				<td bgcolor="#EEEEEE" width="12%">카테고리</td>
-				<td width="28%"><input type="text" size="27" name="cat_name" value="${bookInfo.cat_name}"></td>
-				
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE">서적담당자</td>
-				<td><input type="text" size="27" name="emp_name" id="emp_name" value="${bookInfo.emp_name}"></td>
-				<td bgcolor="#EEEEEE">저자</td>
-				<td><input type="text" size="27" name="writer" id="writer" value="${bookInfo.writer}">
-				</td>
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE" rowspan="2">가격</td>
-				<td rowspan="2"><input type="text" name="book_price" size="27" value="${bookInfo.book_price.trim()}">원</td>
-				<td bgcolor="#EEEEEE" rowspan="2">판매여부</td>
-				<td rowspan="2">
-					<c:if test="${bookInfo.is_print=='y'}">
+  <section id="container">
+     <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+          <!-- settings start -->
+          <li>
+     		 <table>
+        		 <tr>
+        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
+         		</tr>
+      		</table>
+          </li>
+        </ul>
+        <!--  notification end -->
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li>
+            <a class="logout" href="/group4erp/logout.do">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered">
+            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+          </p>
+          <h5 class="centered">Sam Soffes</h5>
+          <li class="mt">
+            <a href="/group4erp/goMainTest.do">
+              <i class="fa fa-dashboard"></i>
+              <span>메인페이지</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span>업무 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goMyCareBookList.do"><i class="fa fa-book"></i>담당 도서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
+              </li>
+              <li>
+                <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
+              </li>
+              <li>
+                <a href="/group4erp/goEmpDayOffjoin.do"><i class="fa fa-edit"></i>휴가 신청</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a class="active" href="javascript:;">
+              <i class="fa fa-shopping-cart"></i>
+              <span>재고 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goBookList.do"><i class="fa fa-info-circle"></i>도서정보조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReleaseList.do"><i class="fa fa-list"></i>출고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goWarehousingList.do"><i class="fa fa-list"></i>입고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReturnOrderList.do"><i class="fa fa-list"></i>반품현황조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-calendar"></i>
+              <span>마케팅 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewSalesInfoList.do"><i class="fa fa-money"></i>판매현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEventList.do"><i class="fa fa-gift"></i>이벤트행사 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-users"></i>
+              <span>인사 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-krw"></i>
+              <span>회계 관리</span>
+              </a>
+            <ul class="sub">
+              <li class="active">
+                <a href="/group4erp/viewTranSpecIssueList.do"><i class="fa fa-list"></i>거래명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewTranSpecList.do"><i class="fa fa-file-text"></i>사업자 거래내역 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewCorpList.do"><i class="fa fa-link"></i>거래처 현황 조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class=" fa fa-bar-chart-o"></i>
+              <span>전략 분석</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewBestKeywdAnalysis.do"><i class="fa fa-search"></i>키워드 검색 자료 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewOurCompanyReport.do"><i class="fa fa-building-o"></i>회사현황</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        
+        
+        
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+      	<table border=0 cellpadding=0 cellspace=0 width="98%">
+      	<tr>
+      	<td widtj=50%>
+      	<h3 align=left><i class="fa fa-angle-right"></i>서적 상세정보(datepicker 수정해야함.)</h3>
+      	<td widtj=50%>
+      	<h3 align=right><i class="fa fa-arrow-left" onclick="goBack();" style="cursor:pointer;"></i></h3>
+        </table>
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-12">
+            <div class="form-panel">
+              <h4 class="mb"><i class="fa fa-angle-right"></i> 서적 정보 </h4>
+              <form name="bookContentUpA" class="form-horizontal style-form" method="get">
+                <div class="form-group">
+                <!-- 
+                  <div class="col-lg-12 col-md-4">
+                    <p class="centered">
+            			<a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+         			</p>
+                  </div>
+                   -->
+                  <label class="col-sm-1 col-sm-1 control-label">책 이름</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" name="book_name" value="${bookInfo.book_name}">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">ISBN13</label>
+                  <div class="col-sm-3">
+                   <p class="form-control-static">${bookInfo.isbn13}</p>
+                   <input type="hidden" name="isbn13" value="${bookInfo.isbn13}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">카테고리</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cat_name" value="${bookInfo.cat_name}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">가격</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="book_price" value="${bookInfo.book_price}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">판매여부</label>
+                  <div class="col-sm-3">
+                    <c:if test="${bookInfo.is_print=='y'}">
 						<input type="radio" name="is_print" value="y" checked>판매중
 						<input type="radio" name="is_print" value="n">절판
 					</c:if>
@@ -268,14 +450,16 @@ $(document).ready(function(){
 						<input type="radio" name="is_print" value="y">판매중
 						<input type="radio" name="is_print" value="n" checked>절판
 					</c:if>
-				</td>
-			<tr></tr>
-			<tr>
-				<td bgcolor="#EEEEEE">페이지 수</td>
-				<td><input type="text" size="27" name="book_pages" value="${bookInfo.book_pages}">쪽</td>
-				<td bgcolor="#EEEEEE">판형</td>
-				<td>
-					<select name="size_name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">페이지수</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="book_pages" value="${bookInfo.book_pages}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">판형</label>
+                  <div class="col-sm-3">
+                    <select name="size_name">
 						<option value="신국판">신국판
 						<option value="국판">국판
 						<option value="46판">46판
@@ -284,106 +468,113 @@ $(document).ready(function(){
 						<option value="국배판">국배판
 						<option value="타블로이드">타블로이드
 						<option value="기타">기타
-				</td>
-				<!--
-			<tr>
-				<td colspan="6">
-					<div class="fileBox" align="left">
-						<input align="left" type="text" class="fileName" readonly="readonly">
-						<label for="uploadBtn" class="btn_file" align="left">프로필pic 수정</label>
-						<input type="file" id="uploadBtn" class="uploadBtn" name="uploadBtn">
-					</div>
-				</td>
-			</tr>-->
-			<!--<tr>
-				 <td colspan="6"><div align="left"><input type="file" name="profilePic" id="profilePic"></div>
-			</tr> -->
-		</table>
-		
-		
-		<br><br>
-		
-		
-		<table class="line" width="850">
-			<tr>
-				<td>&nbsp;&nbsp;<b>서적 외 정보</b></td>
-			</tr>
-		</table>
-		<table table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
-			<tr>
-				<td bgcolor="#EEEEEE">재고 위치</td>
-				<td colspan="2">
-				<select name="branch_name">
+					</select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">서적담당자</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="emp_name" value="${bookInfo.emp_name}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">저자</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="writer" value="${bookInfo.writer}">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- col-lg-12-->
+        </div>
+        <!-- /row -->
+        <!-- INLINE FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-12">
+            <div class="form-panel">
+              <h4 class="mb"><i class="fa fa-angle-right"></i> 서적 외 정보</h4>
+               <form name="bookContentUpB" class="form-horizontal style-form" method="get">
+                <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">출판사</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="publisher" value="${bookInfo.publisher}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">출판사 직원</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="editor" value="${bookInfo.editor}">
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">출판일</label>
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" name="published_dt" id="published_dt" value="${bookInfo.published_dt}">
+                  </div>
+                 </div>
+                <div class="form-group">
+                  <label class="col-sm-1 col-sm-1 control-label">재고 위치</label>
+                  <div class="col-sm-5">
+                    <select name="branch_name">
 					<c:forEach items="${requestScope.inventory_loc}" var="inven" varStatus="loopTagStatus">
              			<option value="${inven.branch_name}">${inven.branch_name}
-             		</c:forEach> 
-				<td bgcolor="#EEEEEE">재고 량</td>
-				<td colspan="2"><input type="text" name="isbn_cnt" value="${bookInfo.isbn_cnt}">권
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE">출판사</td>
-				<td colspan="2"><input type="text" name="publisher" id="publisher" value="${bookInfo.publisher}"></td>
-				<td bgcolor="#EEEEEE">출판일</td>
-				<td colspan="2"><input type="text" name="published_dt" id="published_dt" value="${bookInfo.published_dt}"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE">출판사 담당 직원</td>
-				<td colspan="4"><input type="text" name="editor" value="${bookInfo.editor}">
-			</tr>
-		</table>
-
-		
-		<br>
-	<!--
-		<table class="line" width="850">
-			<tr>
-				<td>&nbsp;&nbsp;<b>직속상관정보</b></td>
-			</tr>
-		</table>
-		<table table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
-			<tr>
-				<td bgcolor="#EEEEEE" width="10%">이름</td>
-				<td width="23%"><input type="text" name="mgr_emp_name" value="${employeeInfoUpDTO.mgr_emp_name}"></td>
-				<td bgcolor="#EEEEEE" width="13%">부서</td>
-				<td width="20%">
-					<%-- <input type="text" name="mgr_emp_dep_name" value="${employeeInfoUpDTO.mgr_emp_dep_name}"> --%>
-					<select name="mgr_emp_dep_name">
-							<option value="총무부">총무부</option>
-							<option value="기획부">기획부</option>
-							<option value="영업부">영업부</option>
-							<option value="마케팅부">마케팅부</option>
-							<option value="사업부">사업부</option>
-							<option value="인사부">인사부</option>
-					</select>
-				</td>
-				<td bgcolor="#EEEEEE" width="10%">직급</td>
-				<td width="23%">
-					<%-- <input type="text" name="mgr_emp_jikup" value="${employeeInfoUpDTO.mgr_emp_jikup}"> --%>
-					<select name="mgr_emp_jikup">
-						<option value="대표이사">대표이사</option>
-						<option value="전무이사">전무이사</option>
-						<option value="상무이사">상무이사</option>
-						<option value="부장">부장</option>
-						<option value="차장">차장</option>
-						<option value="과장">과장</option>
-						<option value="대리">대리</option>
-						<option value="주임">주임</option>
-						<option value="사원">사원</option>
-						<option value="기타">기타</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-		-->
-	</form>
-	<br>
-		<input type="button" value=" 수정 " onclick="bookInfoUp();">&nbsp;
-		<!-- <input type="button" value=" 삭제 " onclick="empInfoDel();">&nbsp; -->
-		<!-- <input type="button" value="뒤로가기" onclick="goBack();"> -->
-		<form method="post" name="empUpDelForm" action="/group4erp/empUpDelProc.do">
-			<input type="hidden" name="emp_no" value="${isbn13}">
-		</form>
-
-
+             		</c:forEach>
+             		</select>
+                  </div>
+                  <label class="col-sm-1 col-sm-1 control-label">재고 량</label>
+                  <div class="col-sm-5">
+                    <input type="text" class="form-control" name="isbn_cnt" value="${bookInfo.isbn_cnt}">
+                  </div>
+                 </div>
+                </form>
+            </div>
+            <!-- /form-panel -->
+          </div>
+          <!-- /col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <!-- INPUT MESSAGES -->
+       <br>
+        <button type="button" class="btn btn-theme02" onclick="bookInfoUp();"><i class="fa fa-check"></i> 수정</button>
+       
+        <!-- /row -->
+        <!-- INPUT MESSAGES -->
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+     <footer class="site-footer">
+      <div class="text-center">
+        <p>
+			KOSMO 자바&빅데이터 과정 팀프로젝트
+        </p>
+        <div class="credits">
+        <font style="font-size:12pt;">
+        ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
+         </font>
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+        </div>
+        <a href="basic_table.html#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
+  <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="${ctRootlib}/jquery.scrollTo.min.js"></script>
+  <script src="${ctRootlib}/jquery.nicescroll.js" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script src="${ctRootlib}/common-scripts.js"></script>
+  <!--script for this page-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
+
 </html>
