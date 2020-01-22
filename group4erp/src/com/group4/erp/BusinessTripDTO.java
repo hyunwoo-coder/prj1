@@ -1,6 +1,7 @@
 package com.group4.erp;
 
 public class BusinessTripDTO {
+
 	private int work_outside_seq;
 	private int RNUM;
 	private int emp_no;
@@ -20,6 +21,14 @@ public class BusinessTripDTO {
 	private String outside_start_time;
 	private String outside_end_time;
 	private String travel_payment;
+	private String deleteYn;
+	
+	public String getDeleteYn() {
+		return deleteYn;
+	}
+	public void setDeleteYn(String deleteYn) {
+		this.deleteYn = deleteYn;
+	}
 
 	public int getWork_outside_seq() {
 		return work_outside_seq;

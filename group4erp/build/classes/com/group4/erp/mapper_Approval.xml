@@ -207,5 +207,19 @@
 			travel_payment = #{confirm}
 		where work_outside_seq = #{doc_no}
 	</update>
+	
+	<update id="deleteBTripApplyInfo" parameterType="com.group4.erp.BusinessTripDTO">
+	
+		update work_outside_info set
+			DELETE_YN = #{deleteYn}
+		where work_outside_seq = #{work_outside_seq}
+	</update>
+	
+	<update id="deleteBTripApproval" parameterType="com.group4.erp.ApprovalDTO">
+	
+		update e_works_info set
+			e_works_state_cd = '0'
+		where document_no = #{document_no}
+	</update>
 	 
 </mapper>

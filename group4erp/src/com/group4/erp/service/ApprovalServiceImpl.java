@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.group4.erp.ApprovalDTO;
 import com.group4.erp.ApprovalSearchDTO;
+import com.group4.erp.BusinessTripDTO;
 import com.group4.erp.dao.ApprovalDAO;
 
 @Service
@@ -134,6 +135,22 @@ public class ApprovalServiceImpl implements ApprovalService {
 		int bTripApprovalCnt = this.approvalDAO.updateBTripApprovalProc(approvalDTO);
 		
 		return bTripApprovalCnt;
+	}
+
+	@Override
+	public int deleteBTripApproval(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int delBTripApprovalCnt = this.approvalDAO.deleteBTripApproval(approvalDTO);
+		
+		return delBTripApprovalCnt;
+	}
+
+	@Override
+	public int deleteBTripApplyInfo(BusinessTripDTO businessTripDTO) {
+		// TODO Auto-generated method stub
+		int delBTripApplyInfoCnt = this.approvalDAO.deleteBTripApplyInfo(businessTripDTO);
+		
+		return delBTripApplyInfoCnt;
 	}
 
 }

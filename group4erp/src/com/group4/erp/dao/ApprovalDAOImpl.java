@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.group4.erp.ApprovalDTO;
 import com.group4.erp.ApprovalSearchDTO;
+import com.group4.erp.BusinessTripDTO;
 
 @Repository
 public class ApprovalDAOImpl implements ApprovalDAO {
@@ -138,6 +139,22 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		int bTripApprovalCnt = this.sqlSession.update(mapper_namespace+"updateBTripApproval", approvalDTO);
 		
 		return bTripApprovalCnt;
+	}
+
+	@Override
+	public int deleteBTripApproval(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int delBTripApprovalCnt = this.sqlSession.update(mapper_namespace+"deleteBTripApproval", approvalDTO);
+		
+		return delBTripApprovalCnt;
+	}
+
+	@Override
+	public int deleteBTripApplyInfo(BusinessTripDTO businessTripDTO) {
+		// TODO Auto-generated method stub
+		int delBTripApplyInfoCnt = this.sqlSession.update(mapper_namespace+"deleteBTripApplyInfo", businessTripDTO);
+		
+		return delBTripApplyInfoCnt;
 	}
 
 }

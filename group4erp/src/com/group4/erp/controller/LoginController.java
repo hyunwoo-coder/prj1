@@ -98,15 +98,14 @@ public class LoginController {
 	public ModelAndView joinMembership() {
 =======
 	*/
-	@RequestMapping(value="/goMainPage.do")
-	public ModelAndView goMainPage(HttpSession session) {
-		
-		ModelAndView mav = new ModelAndView();
-
-		mav.setViewName("main.jsp");
-		mav.addObject("subMenu", "mainPage");
-		return mav;
-	}
+	@RequestMapping(value="/goMainTest.do")
+	   public ModelAndView goMainTest(HttpSession session) {
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.setViewName("test.jsp");
+	      //mav.addObject("subMenu", "mainPage");
+	      return mav;
+	   }
 	
 	@RequestMapping(value="/checkApprovalProc.do")
 	@ResponseBody
