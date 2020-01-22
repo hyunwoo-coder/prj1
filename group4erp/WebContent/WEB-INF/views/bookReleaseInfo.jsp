@@ -171,8 +171,8 @@ $(document).ready(function(){
 							$("#contecntTable2 td:eq(7)").text(data.order_dt);
 							$("#contecntTable2 td:eq(8)").text(data.book_qty);
 							$("#contecntTable2 td:eq(9)").text(data.publisher);
-							$("#contecntTable2 td:eq(10)").text(data.book_price);
-							$("#contecntTable2 td:eq(11)").text(data.all_book_price);
+							$("#contecntTable2 td:eq(10)").text(data.book_price+'원');
+							$("#contecntTable2 td:eq(11)").text(data.all_book_price+'원');
 							$("#contecntTable2 td:eq(12)").text(data.emp_name);
 							
 							var insert = "<tr name='thisTr' bgcolor='white'><td colspan=5>"+$("#allContent #contecnt2").html()+"</td></tr>"

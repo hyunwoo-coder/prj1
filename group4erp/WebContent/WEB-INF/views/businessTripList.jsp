@@ -142,11 +142,14 @@
 				) 
 				&& 
 				(travel_payment =="W")){
-						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-						location.href="/group4erp/businessTripUpDelForm.do?"+str;
-					}else{
-						var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-						location.href="/group4erp/businessTripContentsForm.do?"+str;}
+				  //alert($('[name=getBusinessTripListSearchForm]').serialize());
+				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+				location.replace("/group4erp/businessTripUpDelForm.do?"+str )
+			} else {
+				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
+				location.replace("/group4erp/businessTripContentsForm.do?"+str )
+			}
+
 	}
 
 	function goBusinessTripForm() {
@@ -229,8 +232,7 @@
 	</form>
 	
 	<div id="blankArea"><br></div>
-		<table class="businessTripListTable tab"  name="businessTripListTable" cellpadding="5" cellspacing="5">		
-			<thead>
+		<table class="businessTripListTable tab"  name="businessTripListTable" cellpadding="5" cellspacing="5">
 				<tr>
 					
 					<th>번호</th>
@@ -328,10 +330,7 @@
 					
 					
 				</tr>
-					
-			</thead>
-			<tbody>
-				
+
 			<c:forEach items="${businessTripList}" var="businessList" varStatus="loopTagStatus">
 			<tr class="tab" style="cursor:pointer" onClick="goBusinessTripContentsForm(${businessList.work_outside_seq}
 																						,${businessList.emp_no}
@@ -372,8 +371,7 @@
 					</td>
 			</tr>		
 			</c:forEach>
-			
-			</tbody>
+
 		</table>
 		<c:if test="${businessTripListAllCnt eq 0}">
 						<h5>해당 결과가 없습니다.</h5>

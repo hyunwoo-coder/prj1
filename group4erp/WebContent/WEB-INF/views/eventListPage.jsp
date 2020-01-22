@@ -34,6 +34,13 @@
 }
 </style>
 
+<% String emp_nm = (String)session.getAttribute("emp_name"); 
+	System.out.println("emp_nm==="+emp_nm);
+	
+	request.setAttribute("emp_nm", emp_nm);
+
+%>
+
 <script>
 
 	$(document).ready(function(){
@@ -402,7 +409,18 @@
 						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 asc'); goSearch();  ">상태</th>
 					</c:otherwise>
 				</c:choose>
-				<th>성명</th>
+				
+				<c:choose>
+					<c:when test="${param.sort=='2 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 담당자</th>
+					</c:when>
+					<c:when test="${param.sort=='2 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('2 desc'); goSearch(); "> ▲ 담당자</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('2 asc'); goSearch();  ">담당자</th>
+					</c:otherwise>
+				</c:choose>
 				<th>비고</th>
 			</tr>
 			
@@ -410,7 +428,9 @@
 				<tr style="cursor:pointer" onClick="viewEventInfoForm(${empList.emp_no});">		
 					<td class="delCheckBox" align=center>
 						<c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려' }">
-							<input type="checkbox" name="delCheckBox" value="${eventList.evnt_no}">
+							<c:if test="${eventList.emp_name eq emp_nm}">
+								<input type="checkbox" name="delCheckBox" value="${eventList.evnt_no}">
+							</c:if>
 						</c:if>
 					</td>
 					<td align=center>${eventAllCnt -eventList.RNUM+1}</td>
@@ -420,9 +440,14 @@
 					<td align=center>${eventList.evnt_start_dt}</td>
 					<td align=center>${eventList.evnt_end_dt}</td>
 					<td align=center>${eventList.evnt_stat}</td>
-					<td align=center>${eventList.emp_name}</td>
-					<td><c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려'}">
-							<input type="button" name="updateBtn" value="수정" onClick="updateEventInfo(this,'${eventList.evnt_no}', '${eventList.evnt_title}', '${eventList.evnt_start_dt}', '${eventList.evnt_end_dt}', '${eventList.evnt_comment}');">
+					<td align=center>${eventList.emp_name} </td>
+					<td><c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려'}">							
+								<c:if test="${eventList.emp_name eq emp_nm}">
+									
+									<input type="button" name="updateBtn" value="수정" onClick="updateEventInfo(this,'${eventList.evnt_no}', '${eventList.evnt_title}', '${eventList.evnt_start_dt}', '${eventList.evnt_end_dt}', '${eventList.evnt_comment}');">
+						
+								</c:if>
+							
 						</c:if>
 					</td>
 				</tr>		

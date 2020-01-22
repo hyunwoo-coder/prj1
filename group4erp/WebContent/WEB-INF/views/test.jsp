@@ -4,13 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-	location.replace("/group4erp/loginForm.do");
-</script>
-<title>YES4조 전사적자원관리 시스템</title>
+<title>Insert title here</title>
 </head>
-<body>
-
-
+테스트화면입니다. 이 파일을 보았다면 팀원간 깃허브 연동이 성공했습니다.
 </body>
 </html>

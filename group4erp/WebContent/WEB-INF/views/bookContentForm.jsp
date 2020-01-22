@@ -142,7 +142,11 @@ $(document).ready(function(){
 		
 		
 		var checkPirce = $('[name=book_price]').val();
-		if(isNaN(checkPirce)==true){
+		if(checkPirce.indexOf(',')>0){
+			var num = checkPirce.replace(',','');
+			$('[name=book_price]').val(num);
+		}
+		else if(isNaN(checkPirce)==true){
 			alert("책 가격은 숫자만 기입해주세요");
 			//$('[name=book_price]').val();
 			return;
@@ -253,7 +257,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td bgcolor="#EEEEEE" rowspan="2">가격</td>
-				<td rowspan="2"><input type="text" name="book_price" size="27" value="${bookInfo.book_price}">원</td>
+				<td rowspan="2"><input type="text" name="book_price" size="27" value="${bookInfo.book_price.trim()}">원</td>
 				<td bgcolor="#EEEEEE" rowspan="2">판매여부</td>
 				<td rowspan="2">
 					<c:if test="${bookInfo.is_print=='y'}">

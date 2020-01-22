@@ -258,9 +258,9 @@
     		co.isbn13 "isbn13",
     		(select b.book_name from book b where b.isbn13=co.isbn13) "book_name",
     		co.corp_no "corp_no",
-    		(select b.book_price from book b where b.isbn13=co.isbn13) "book_price",
-    		co.books_qty "books_qty",
-    		(select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty "tot_cost",
+    		to_char((select b.book_price from book b where b.isbn13=co.isbn13),'999,999,999,999') "book_price",
+    		to_char(co.books_qty,'999,999,999') "books_qty",
+    		to_char(((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty),'999,999,999,999') "tot_cost",
     		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1||'' "tax",
     		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt"
     	from corp_order_info co

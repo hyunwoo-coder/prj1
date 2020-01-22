@@ -43,6 +43,14 @@
 		$('[name=rowCntPerPage]').change(function(){
 			goSearchMyWorkList();
 		});
+
+	   setTableTrBgColor(
+				"mycarebookTable"								//테이블 class값
+				, "${headerColor}"									//해더 tr 배경색
+				, "${oddTrColor}"									//홀수행 배경색
+				, "${evenColor}"									//짝수행 배경색
+				, "${mouseOverColor}"								//마우스 온 시 배경색
+		);
 		
 		$(".pagingNumber").html(
 				getPagingNumber(
@@ -279,7 +287,6 @@
       
       
       <table class="mycarebookTable tab" width="80%" border=0 cellspacing=5 cellpadding=5 >
-      	<thead>
          <tr bgcolor="gray">
          	<th width="4%">No
             <c:choose>
@@ -366,8 +373,7 @@
 							onclick="$('[name=sort]').val('14 asc'); goSearchMyWorkList();">보유지점
 					</c:otherwise>
 			</c:choose>
-			
-            
+         
 			
 			<c:choose>
 					<c:when test="${param.sort=='9 desc'}">
@@ -386,6 +392,7 @@
 			<th width="8%">비고</th>
         </thead>
         <tbody>    
+
          <c:forEach items="${requestScope.MyCareBookList}" var="MyCareBookList" varStatus="loopTagStatus">
          <tr>   
 
@@ -393,10 +400,19 @@
             <td align=center>${MyCareBookList.ISBN13}
             <td align=center>${MyCareBookList.book_name}
             <td align=center>${MyCareBookList.cat_name}
-            <td align=center>${MyCareBookList.book_price}
+            <td align=center>${MyCareBookList.book_price}원
             <td align=center>${MyCareBookList.ISBN_cnt}
             <td align=center>${MyCareBookList.branch_name}
-			<td align=center>${MyCareBookList.is_print}
+
+            <td align=center>
+            	<c:choose>
+            		<c:when test="${MyCareBookList.is_print eq 'y'}">
+						출판
+					</c:when>
+					<c:when test="${MyCareBookList.is_print eq 'n'}">
+						절판
+					</c:when>
+            	</c:choose>
 
             <td align=center>
                <c:if test="${MyCareBookList.ISBN_cnt < 100}">
@@ -406,7 +422,6 @@
                   --
                </c:if>  
          </c:forEach>
-         </tbody>
       </table>
       <br>
         <input type="hidden" name="selectPageNo">

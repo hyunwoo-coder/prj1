@@ -205,7 +205,7 @@ td{
                        		$("#contentTable td:eq(0)").text(data.emp_name);
                        		$("#contentTable td:eq(1)").text(data.order_dt);
                        		$("#contentTable td:eq(2)").text(data.order_stock_cnt);
-                       		$("#contentTable td:eq(3)").text(data.cost);
+                       		$("#contentTable td:eq(3)").text(data.cost+'원');
                        		$("#contentTable td:eq(4)").text(data.supply_rate);
                        		$("#contentTable td:eq(5)").text(data.store_req_dt);
                        		$("#contentTable td:eq(6)").text(data.branch_name);
@@ -350,7 +350,6 @@ td{
 					<td style="text-align:left" colspan=3>
 						<input type="text" name="wh_keyword" size=72>
 					</td>
-					
 				</tr>
 			</table>
 			<br>

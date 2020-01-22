@@ -309,14 +309,16 @@
 		<table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
 			<tr>
 				<td rowspan="6" colspan="2" width="20%">
-					<c:choose>
-                    	<c:when test="${empty employeeInfoUpDTO.emp_pic || employeeInfoUpDTO.emp_pic=='newWithoutPic'}">
-                    		<img src="${ctRootImage}/default.jpg" width="100%" height="30%">
-                        </c:when>
-                    	<c:otherwise>
-                            <img src="${ctRootImage}/${employeeInfoUpDTO.emp_pic}" width="100%" height="189">
-                        </c:otherwise>
-                    </c:choose>
+
+				<c:choose>
+					<c:when test="${empty employeeInfoUpDTO.emp_pic || employeeInfoUpDTO.emp_pic=='newWithoutPic'}">
+						<img src="${ctRootImage}/default.jpg" width="100%" height="30%">
+					</c:when>
+					<c:otherwise>
+						<img src="${ctRootImage}/${employeeInfoUpDTO.emp_pic}" width="100%" height="189">
+					</c:otherwise>
+				</c:choose>
+
 					<%-- <img src="${ctRootImage}/emp_0003.jpg" width="100%" height="150"> --%>
 				<!-- <img src="../image/emp_0002.jpg"> --></td>
 				<td bgcolor="#EEEEEE" width="12%">성명</td>

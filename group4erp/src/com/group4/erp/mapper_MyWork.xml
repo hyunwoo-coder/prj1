@@ -78,7 +78,7 @@
                  ISBN13 "ISBN13",
                  book_name "book_name",
                  cat_name "cat_name",
-                 book_price "book_price",
+                 to_char(book_price,'999,999,999,999') "book_price",
                  book_pages "book_pages",
                  writer "writer",
                  publisher "publisher",
@@ -118,7 +118,7 @@
                 b.ISBN13                     as "ISBN13"
                 ,b.book_name                 as "book_name"
                 ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "cat_name"
-                ,b.book_price              as "book_price"
+                ,to_char(b.book_price,'999,999,999,999')              as "book_price"
                 ,b.book_pages||''         as "book_pages"
                 ,b.writer                 as "writer"
                 ,b.publisher                 as "publisher"
@@ -127,7 +127,7 @@
                 ,b.emp_no||''                as "emp_no"
                 ,to_char(b.published_dt,'YYYY-MM-DD') as "published_dt" 
                 ,b.editor                    as "editor"
-                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_cnt"
+                ,to_char((select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13),'999,999,999') as  "ISBN_cnt"
                 ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "branch_name"
             from book b 
             where b.emp_no = '${emp_no}'
