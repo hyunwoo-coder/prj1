@@ -121,23 +121,25 @@
 	function reApprovalProc(document_no) {
 		//alert("다시 결재 요청합니다. "+document_no);
 		if(document_no.indexOf('EV') >= 0) {
-			//alert("이벤트 행사 재결재");
-			location.replace("/group4erp/eventScheduling.do?evnt_no="+document_no);
+			alert("이벤트 행사 재결재"+document_no);
+
+			location.href = "/group4erp/eventScheduling.do?evnt_no="+document_no;
+			//location.replace('/group4erp/eventScheduling.do?evnt_no='+document_no);
+			//location.replace("/group4erp/viewEventList.do");
+			//location.replace("/group4erp/eventScheduling.do");
 
 		} else if(document_no.indexOf('DO') >= 0) {
-			location.replace("/group4erp/goEmpDayOffjoin.do");
+			location.replace('/group4erp/goEmpDayOffjoin.do');
 
 		} else if(document_no.indexOf('BT') >= 0) {
-			location.replace("/group4erp/businessTripForm.do");
+			location.replace('/group4erp/businessTripForm.do');
 		}
 
 	}
 
 
 	function deleteApproval(document_no) {
-		//alert("삭제 로직 시작=="+document_no);
-
-
+		
 		if(document_no.indexOf("EV") >= 0) {
 
 		$.ajax({
@@ -234,8 +236,6 @@
 				}	
 			});
 		}
-
-		/* */
 		
 	}
 
@@ -327,7 +327,7 @@
 					<%--<td>${approvalResList.approval_num}</td> --%>
 					<td>${approvalResList.jikup}</td>
 					<td>${approvalResList.emp_name}</td>
-					<td>${approvalResList.document_no}</td>
+					<td>${approvalResList.document_no} </td>
 					<td>${approvalResList.e_works_req_dt}</td>
 					<td>${approvalResList.approval_state}</td>
 				</tr>	
@@ -419,9 +419,15 @@
 				<h5>결재를 요청한 내역이 없습니다.</h5>
 			</c:if>
 		</form>
-			<h5>'대기중'인 결재 문서는 수정 & 삭제가 가능합니다.<br>
-			'심사중'인 결재 문건은 수정과 삭제가 불가하며, 부득이하게 취소하고자 할 경우에는 담당 부서장과 상의하시기 바랍니다.</h5>
-		</center>
+		<div id="comment" align="center">
+			<h5>
+			결재문서일련번호는 EV(이벤트 행사 신청), DO(휴가 신청), BT(출장 신청)로 구분되니 참고바랍니다.<br>
+			'대기중'인 결재 문서는 수정 & 삭제가 가능하지만,	'심사중'인 결재 문건은 수정과 삭제가 불가합니다.<br>
+			결재가 진행중인 안건을 부득이하게 취소하고자 할 경우에는 담당 부서장과 상의하시기 바랍니다.</h5>
+		
+		</div>
+
+	</center>
 	
 </body>
 </html>

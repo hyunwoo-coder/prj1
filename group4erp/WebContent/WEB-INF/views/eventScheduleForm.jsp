@@ -229,9 +229,9 @@
 	//재결재 로직
 	function reApprovalProc() {
 		alert("재결재 로직 시작");
-		//var evnt_no = $("#event_no").html();
+		var evnt_no = $("#event_no").html();
 		//alert(evnt_no);
-		//inputData("[name=evnt_no]", evnt_no);
+		inputData("[name=evnt_no]", evnt_no);
 		inputData("[name=emp_no]", 5);
 		if(is_empty("[name = evnt_title]")) {
 			alert("이벤트 타이틀을 입력해주세요.");
@@ -362,7 +362,13 @@
     	
 	    </script>
 	    
-		<input type="button" value="결재" onClick="checkForm();">
+	    <c:if test="${myEventReApproval != null}">
+	    	<input type="button" value="다시 결재" onClick="reApprovalProc();">
+	    </c:if>
+	    <c:if test="${empty myEventReApproval}">
+	    	<input type="button" value="결재" onClick="checkForm();">
+	    </c:if>
+		
 		<input type="reset" value="초기화">
 		<input type="hidden" name="evnt_no" value="${evnt_no}">
 		<input type="hidden" name="emp_no" value="${emp_no}">
