@@ -618,7 +618,7 @@
 			               </c:if>
 			               <c:if test="${MyCareBookList.ISBN_cnt >= 100}">
 			                  --
-			               </c:if>  
+			               </c:if>
 			         </c:forEach>
 					</tbody>
 			</table>
