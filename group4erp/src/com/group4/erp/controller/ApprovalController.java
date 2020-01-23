@@ -408,9 +408,9 @@ public class ApprovalController {
 			method=RequestMethod.POST, 
 			produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public int deleteBTripApprovalProc(@RequestParam(value="document_no") String document_no, ApprovalDTO approvalDTO) {
+	public int deleteBTripApprovalProc(@RequestParam(value="document_no") String document_no, ApprovalDTO approvalDTO, BusinessTripDTO businessTripDTO) {
 	
-		int approvalUpCnt = 0;
+		int approvalDelCnt = 0;
 		int bTripDelCnt = 0;
 		
 		System.out.println("deleteDayOffApprovalProc() 메소드 시작==="+document_no);
@@ -422,12 +422,18 @@ public class ApprovalController {
 			document_no = document_no.substring(3);
 			System.out.println("document_no==="+document_no);
 			
-			//int bTrip_apply_no = Integer.parseInt(document_no); 
+			int bTrip_apply_no = Integer.parseInt(document_no); 
+			
+			
 			
 			//emp_dayoff_apply 테이블에 있는 내역을 삭제한다.
-			//bTripDelCnt = this.approvalService.deleteDayOffApproval(bTrip_apply_no);
+			//app = this.approvalService.deleteDayOffApproval(bTrip_apply_no);
+			businessTripDTO.setWork_outside_seq(bTrip_apply_no);
+			businessTripDTO.setDeleteYn("Y");
 			
 			
+			approvalDelCnt = this.approvalService.deleteBTripApproval(approvalDTO);
+			bTripDelCnt = this.approvalService.deleteBTripApplyInfo(businessTripDTO);
 			//dayOffApplyDTO.setConfirm("C");
 			//eventDTO.setEvnt_state_cd("0");
 			
@@ -449,7 +455,7 @@ public class ApprovalController {
 			System.out.println("deleteEvntApprovalProc() 메소드에서 예외 발생 >>> "+e);
 		}
 				
-		return approvalUpCnt;
+		return approvalDelCnt;
 	}
 
 }

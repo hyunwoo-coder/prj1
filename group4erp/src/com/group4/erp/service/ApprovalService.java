@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.group4.erp.ApprovalDTO;
 import com.group4.erp.ApprovalSearchDTO;
+import com.group4.erp.BusinessTripDTO;
 
 public interface ApprovalService {
 	
@@ -36,5 +37,9 @@ public interface ApprovalService {
 	int deleteDayOffApproval(int dayoff_apply_no);
 	
 	int updateBTripApprovalProc(ApprovalDTO approvalDTO);
+	
+	int deleteBTripApproval(ApprovalDTO approvalDTO);
+	
+	int deleteBTripApplyInfo(BusinessTripDTO businessTripDTO);
 
 }
